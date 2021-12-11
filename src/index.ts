@@ -35,3 +35,17 @@ document
   .addEventListener("click", () =>
     startAddingStudents(howManyTimesToAddStudents)
   );
+document
+  .getElementsByClassName("add-trainers")[0]
+  .addEventListener("click", () =>
+    startAddingTrainers(howManyTimesToAddTrainers)
+  );
+document
+  .getElementsByClassName("add-assignments")[0]
+  .addEventListener("click", () =>
+    startAddingAssignments(howManyTimesToAddAssignments)
+  );
+document.getElementsByClassName("add-courses")[0].addEventListener(
+  "click",
+  () => startAddingAssignments(howManyTimesToAddCourses) //dfsdgjsfgjs
+);
