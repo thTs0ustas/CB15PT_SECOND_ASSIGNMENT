@@ -1,23 +1,39 @@
 let startAddingCourses = (howManyTimes: number) => {
-  alert(howManyTimes);
   while (howManyTimes > 0) {
     if (howManyTimes === 0) return;
-    let fName: string = prompt("Input first name")!;
-    let lName: string = prompt("Input last name")!;
-    let subject: string = prompt("Input type of subject")!;
+    let title: string = prompt("Input courses title")!;
+    let steam: string = prompt("Input steam")!;
+    let type: string = prompt("Input type of course")!;
+    let startDate: string = prompt("Input start date of course in mm/dd/yyyy")!;
+    let endDate: string = prompt("Input end date of course in mm/dd/yyyy")!;
 
-    // let course = new Course(fName, lName, subject);
-    // assignmentState.push(course);
+    let course = new Course(
+      title,
+      steam,
+      type,
+      getDate(startDate),
+      getDate(endDate),
+      []
+    );
+    courseState.push(course);
     howManyTimes--;
   }
-  console.log(studentState);
+
   document.getElementsByClassName("coursesState")[0].innerHTML = courseState
     .map(
       (course) => /*HTML*/ `
       <div>
-        <p>First name: ${trainer.firstName}</p>
-        <p>Last name: ${trainer.lastName}</p>
-        <p>Date of birth: ${trainer.subject}</p>
+        <p>Title: ${course.title}</p>
+        <p>Stream: ${course.stream}</p>
+        <p>Type: ${course.type}</p>
+        <p>Start Date: ${course.startDate}</p>
+        <p>End Date: ${course.endDate}</p>
+        <ul>
+        ${course.trainers.map(
+          (trainer) =>
+            `<li>Trainer:${trainer.firstName} ${trainer.lastName}</li>`
+        )}
+        </ul>
       </div>
       <hr/> 
       `

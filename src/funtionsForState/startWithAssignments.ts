@@ -2,9 +2,11 @@ let startAddingAssignments = (howManyTimes: number) => {
   alert(howManyTimes);
   while (howManyTimes > 0) {
     if (howManyTimes === 0) return;
-    let title: string = prompt("Input first name")!;
-    let description: string = prompt("Input last name")!;
-    let submissionDate: string = prompt("Input type of subject")!;
+    let title: string = prompt("Input assignment title")!;
+    let description: string = prompt("Input assignment description")!;
+    let submissionDate: string = prompt(
+      "Input tsubmission date in mm/dd/yyyy"
+    )!;
 
     let assignment = new Assignment(
       title,
@@ -14,7 +16,7 @@ let startAddingAssignments = (howManyTimes: number) => {
     assignmentState.push(assignment);
     howManyTimes--;
   }
-  console.log(assignmentState);
+
   document.getElementsByClassName("assignmentState")[0].innerHTML =
     assignmentState
       .map(

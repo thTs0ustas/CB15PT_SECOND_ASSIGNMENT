@@ -6,7 +6,7 @@ let startAddingStudents = (howManyTimes: number) => {
     let lName: string = prompt("Input last name")!;
     let date: string = prompt("Input birth date in mm/dd/yyyy form")!;
 
-    let student = new Student(fName, lName, getDate(date), 2000, []);
+    let student = new Student(fName, lName, getDate(date), 0, []);
     studentState.push(student);
     howManyTimes--;
   }

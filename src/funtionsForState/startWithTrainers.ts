@@ -1,5 +1,4 @@
 let startAddingTrainers = (howManyTimes: number) => {
-  alert(howManyTimes);
   while (howManyTimes > 0) {
     if (howManyTimes === 0) return;
     let fName: string = prompt("Input first name")!;
@@ -10,7 +9,6 @@ let startAddingTrainers = (howManyTimes: number) => {
     trainerState.push(trainer);
     howManyTimes--;
   }
-  console.log(studentState);
   document.getElementsByClassName("trainerState")[0].innerHTML = trainerState
     .map(
       (trainer) => /*HTML*/ `
