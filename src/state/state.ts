@@ -1,4 +1,4 @@
 let studentState: Student[] = [];
-let trainerState = [];
-let assigmentState = [];
+let trainerState: Trainer[] = [];
+let assignmentState: Assignment[] = [];
 let courseState: Course[] = [];
