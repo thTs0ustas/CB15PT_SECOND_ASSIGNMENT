@@ -1,4 +1,8 @@
-let startAddingStudents = (howManyTimes: number) => {
+import { getDate } from "..";
+import { Student } from "../classes/students";
+import { studentState } from "../state/state";
+
+export let startAddingStudents = (howManyTimes: number) => {
   alert(howManyTimes);
   while (howManyTimes > 0) {
     if (howManyTimes === 0) return;

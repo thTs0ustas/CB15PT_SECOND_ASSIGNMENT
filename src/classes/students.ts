@@ -1,3 +1,5 @@
+import { AssignInterface } from "./assingments";
+
 class Students {
   constructor(
     public firstName: string,
@@ -31,7 +33,7 @@ class Students {
   }
 }
 
-class Student extends Students {
+export class Student extends Students {
   assignments: AssignInterface[];
   constructor(
     firstName: string,

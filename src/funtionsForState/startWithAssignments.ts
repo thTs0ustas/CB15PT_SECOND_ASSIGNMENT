@@ -1,4 +1,8 @@
-let startAddingAssignments = (howManyTimes: number) => {
+import { getDate } from "..";
+import { Assignment } from "../classes/assingments";
+import { assignmentState } from "../state/state";
+
+export let startAddingAssignments = (howManyTimes: number) => {
   alert(howManyTimes);
   while (howManyTimes > 0) {
     if (howManyTimes === 0) return;

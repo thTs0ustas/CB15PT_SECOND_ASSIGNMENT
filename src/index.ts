@@ -1,4 +1,10 @@
-let getDate = (date: string) => new Date(date).toISOString().split("T")[0];
+import { startAddingAssignments } from "./funtionsForState/startWithAssignments";
+import { startAddingCourses } from "./funtionsForState/startWithCourses";
+import { startAddingStudents } from "./funtionsForState/startWithStudents";
+import { startAddingTrainers } from "./funtionsForState/startWithTrainers";
+
+export let getDate = (date: string) =>
+  new Date(date).toISOString().split("T")[0];
 
 let howManyTimesToAddStudents: number;
 let howManyTimesToAddTrainers: number;
@@ -45,7 +51,8 @@ document
   .addEventListener("click", () =>
     startAddingAssignments(howManyTimesToAddAssignments)
   );
-document.getElementsByClassName("add-courses")[0].addEventListener(
-  "click",
-  () => startAddingAssignments(howManyTimesToAddCourses) //dfsdgjsfgjs
-);
+document
+  .getElementsByClassName("add-courses")[0]
+  .addEventListener("click", () =>
+    startAddingCourses(howManyTimesToAddCourses)
+  );

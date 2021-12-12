@@ -1,4 +1,4 @@
-interface AssignInterface {
+export interface AssignInterface {
   title: string;
   description: string;
   subDateTime: string;
@@ -48,7 +48,7 @@ class Assignments implements AssignInterface {
   }
 }
 
-class Assignment extends Assignments {
+export class Assignment extends Assignments {
   constructor(title: string, description: string, subDateTime: string) {
     super(title, description, subDateTime);
   }

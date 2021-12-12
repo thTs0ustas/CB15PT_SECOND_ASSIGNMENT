@@ -1,4 +1,7 @@
-let startAddingTrainers = (howManyTimes: number) => {
+import { Trainer } from "../classes/trainers";
+import { trainerState } from "../state/state";
+
+export let startAddingTrainers = (howManyTimes: number) => {
   while (howManyTimes > 0) {
     if (howManyTimes === 0) return;
     let fName: string = prompt("Input first name")!;
@@ -9,16 +12,18 @@ let startAddingTrainers = (howManyTimes: number) => {
     trainerState.push(trainer);
     howManyTimes--;
   }
-  document.getElementsByClassName("trainerState")[0].innerHTML = trainerState
+  document.getElementsByClassName("trainerState")[0].innerHTML = /*HTML*/ `<div>
+  ${trainerState
     .map(
-      (trainer) => /*HTML*/ `
+      (trainer: Trainer) => /*HTML*/ `
       <div>
-        <p>First name: ${trainer.firstName}</p>
-        <p>Last name: ${trainer.lastName}</p>
-        <p>Date of birth: ${trainer.subject}</p>
+      <p>First name: ${trainer.firstName}</p>
+      <p>Last name: ${trainer.lastName}</p>
+      <p>Subject: ${trainer.subject}</p>
       </div>
-      <hr/> 
       `
     )
-    .join("");
+    .join("")}
+      <hr/> 
+      </div>`;
 };

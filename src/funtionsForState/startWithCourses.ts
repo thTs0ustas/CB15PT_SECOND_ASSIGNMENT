@@ -1,4 +1,9 @@
-let startAddingCourses = (howManyTimes: number) => {
+import { getDate } from "..";
+import { Course } from "../classes/courses";
+import { Trainer } from "../classes/trainers";
+import { courseState } from "../state/state";
+
+export let startAddingCourses = (howManyTimes: number) => {
   while (howManyTimes > 0) {
     if (howManyTimes === 0) return;
     let title: string = prompt("Input courses title")!;
@@ -30,7 +35,7 @@ let startAddingCourses = (howManyTimes: number) => {
         <p>End Date: ${course.endDate}</p>
         <ul>
         ${course.trainers.map(
-          (trainer) =>
+          (trainer: Trainer) =>
             `<li>Trainer:${trainer.firstName} ${trainer.lastName}</li>`
         )}
         </ul>

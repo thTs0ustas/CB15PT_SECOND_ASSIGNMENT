@@ -8,7 +8,7 @@ class Courses {
   ) {}
 }
 
-class Course extends Courses {
+export class Course extends Courses {
   constructor(
     title: string,
     stream: string,
