@@ -24,7 +24,7 @@ export let startAddingCourses = (howManyTimes: number) => {
     howManyTimes--;
   }
 
-  document.getElementsByClassName("coursesState")[0].innerHTML = courseState
+  document.getElementsByClassName("courseState")[0].innerHTML = courseState
     .map(
       (course) => /*HTML*/ `
       <div>

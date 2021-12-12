@@ -16,34 +16,34 @@ class Assignments implements AssignInterface {
   ) {}
   // getters and setters
 
-  get getTitle() {
+  getTitle() {
     return `Assignment's title: ${this.title}`;
   }
-  set getTitle(newTitle) {
+  setTitle(newTitle: string) {
     this.title = newTitle;
   }
-  get getDescription() {
+  getDescription() {
     return `Assignment's description: ${this.description}`;
   }
-  set getDescription(newDesc) {
+  setDescription(newDesc: string) {
     this.description = newDesc;
   }
-  get getSubDate() {
+  getSubDate() {
     return `Assignment's submission date: ${this.description}`;
   }
-  set getSubDate(newSubDate) {
+  setSubDate(newSubDate: string) {
     this.subDateTime = newSubDate;
   }
-  get getOralMark() {
+  getOralMark() {
     return this.oralMark;
   }
-  set getOralMark(updatedOralMark: number) {
+  setOralMark(updatedOralMark: number) {
     this.oralMark = updatedOralMark;
   }
-  get getTotalMark() {
+  getTotalMark() {
     return this.totalMark;
   }
-  set getTotalMark(updatedtotalMark: number) {
+  setTotalMark(updatedtotalMark: number) {
     this.totalMark = updatedtotalMark;
   }
 }
