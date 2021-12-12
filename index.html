@@ -4,32 +4,45 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/styles/root.css" />
+    <link rel="stylesheet" href="src/styles/students.css" />
+    <link rel="stylesheet" href="src/styles/trainers.css" />
+    <link rel="stylesheet" href="src/styles/courses.css" />
+    <link rel="stylesheet" href="src/styles/assignments.css" />
     <title>Document</title>
   </head>
-  <body>
-    <div>
+  <body id="root">
+    <div class="students">
       <div class="studentState"></div>
+      <div class="buttons">
+        <button id="howManyStudents">How many Students</button>
+        <button class="add-students">Add Students</button>
+      </div>
     </div>
-    <button id="howManyStudents">How many Students</button>
-    <button class="add-students">Add Students</button>
     <br />
     <div>
-      <div class="trainerState"></div>
+      <div class="trainers">
+        <div class="trainerState"></div>
+        <button id="howManyTrainers">How many Trainers</button>
+        <button class="add-trainers">Add Trainers</button>
+      </div>
     </div>
-    <button id="howManyTrainers">How many Trainers</button>
-    <button class="add-trainers">Add Trainers</button>
     <br />
     <div>
-      <div class="courseState"></div>
+      <div class="courses">
+        <div class="courseState"></div>
+        <button id="howManyCourses">How many Courses</button>
+        <button class="add-courses">Add Courses</button>
+      </div>
     </div>
-    <button id="howManyCourses">How many Courses</button>
-    <button class="add-courses">Add Courses</button>
     <br />
     <div>
-      <div class="assignmentState"></div>
+      <div class="assignments">
+        <div class="assignmentState"></div>
+        <button id="howManyAssignments">How many Assigments</button>
+        <button class="add-assignment">Add Assignments</button>
+      </div>
     </div>
-    <button id="howManyAssignments">How many Assigments</button>
-    <button class="add-assignment">Add Assignments</button>
     <br />
 
     <script type="module" src="./dist/bundle.js"></script>

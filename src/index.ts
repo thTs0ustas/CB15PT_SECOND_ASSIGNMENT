@@ -12,27 +12,17 @@ let howManyTimesToAddCourses: number;
 let howManyTimesToAddAssignments: number;
 
 document.getElementById("howManyStudents")?.addEventListener("click", () => {
-  howManyTimesToAddStudents = +prompt(
-    "How many students do you want to add?",
-    "0"
-  )!;
+  howManyTimesToAddStudents = +prompt("How many students do you want to add?")!;
 });
 document.getElementById("howManyTrainers")?.addEventListener("click", () => {
-  howManyTimesToAddTrainers = +prompt(
-    "How many trainers do you want to add?",
-    "0"
-  )!;
+  howManyTimesToAddTrainers = +prompt("How many trainers do you want to add?")!;
 });
 document.getElementById("howManyCourses")?.addEventListener("click", () => {
-  howManyTimesToAddCourses = +prompt(
-    "How many courses do you want to add?",
-    "0"
-  )!;
+  howManyTimesToAddCourses = +prompt("How many courses do you want to add?")!;
 });
 document.getElementById("howManyAssignments")?.addEventListener("click", () => {
   howManyTimesToAddAssignments = +prompt(
-    "How many assignments do you want to add?",
-    "0"
+    "How many assignments do you want to add?"
   )!;
 });
 
@@ -47,7 +37,7 @@ document
     startAddingTrainers(howManyTimesToAddTrainers)
   );
 document
-  .getElementsByClassName("add-assignments")[0]
+  .getElementsByClassName("add-assignment")[0]
   .addEventListener("click", () =>
     startAddingAssignments(howManyTimesToAddAssignments)
   );
