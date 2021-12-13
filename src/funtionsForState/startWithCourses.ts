@@ -1,18 +1,19 @@
 import { getDate } from "..";
-import { Course } from "../classes/courses";
-import { Trainer } from "../classes/trainers";
+import { Course, Trainer } from "../classes";
 import { courseState } from "../state/state";
 
 export let startAddingCourses = (howManyTimes: number) => {
   while (howManyTimes > 0) {
     if (howManyTimes === 0) return;
-    let title: string = prompt("Input courses title")!;
-    let steam: string = prompt("Input steam")!;
-    let type: string = prompt("Input type of course")!;
-    let startDate: string = prompt("Input start date of course in mm/dd/yyyy")!;
-    let endDate: string = prompt("Input end date of course in mm/dd/yyyy")!;
+    const title: string = prompt("Input courses title")!;
+    const steam: string = prompt("Input steam")!;
+    const type: string = prompt("Input type of course")!;
+    const startDate: string = prompt(
+      "Input start date of course in mm/dd/yyyy"
+    )!;
+    const endDate: string = prompt("Input end date of course in mm/dd/yyyy")!;
 
-    let course = new Course(
+    const course = new Course(
       title,
       steam,
       type,
@@ -40,7 +41,7 @@ export let startAddingCourses = (howManyTimes: number) => {
         )}
         </ul>
       </div>
-      <hr/> 
+      <hr/>
       `
     )
     .join("");

@@ -1,18 +1,18 @@
 import { getDate } from "..";
-import { Assignment } from "../classes/assingments";
+import { Assignment } from "../classes";
 import { assignmentState } from "../state/state";
 
 export let startAddingAssignments = (howManyTimes: number) => {
   alert(howManyTimes);
   while (howManyTimes > 0) {
     if (howManyTimes === 0) return;
-    let title: string = prompt("Input assignment title")!;
-    let description: string = prompt("Input assignment description")!;
-    let submissionDate: string = prompt(
-      "Input tsubmission date in mm/dd/yyyy"
+    const title: string = prompt("Input assignment title")!;
+    const description: string = prompt("Input assignment description")!;
+    const submissionDate: string = prompt(
+      "Input submission date in mm/dd/yyyy"
     )!;
 
-    let assignment = new Assignment(
+    const assignment = new Assignment(
       title,
       description,
       getDate(submissionDate)
@@ -20,7 +20,6 @@ export let startAddingAssignments = (howManyTimes: number) => {
     assignmentState.push(assignment);
     howManyTimes--;
   }
-
   document.getElementsByClassName("assignmentState")[0].innerHTML =
     assignmentState
       .map(
@@ -30,7 +29,7 @@ export let startAddingAssignments = (howManyTimes: number) => {
         <p>Decriptions: ${assignment.description}</p>
         <p>Submission date: ${assignment.subDateTime}</p>
       </div>
-      <hr/> 
+      <hr/>
       `
       )
       .join("");

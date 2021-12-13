@@ -1,14 +1,14 @@
-import { Trainer } from "../classes/trainers";
+import { Trainer } from "../classes";
 import { trainerState } from "../state/state";
 
 export let startAddingTrainers = (howManyTimes: number) => {
   while (howManyTimes > 0) {
     if (howManyTimes === 0) return;
-    let fName: string = prompt("Input first name")!;
-    let lName: string = prompt("Input last name")!;
-    let subject: string = prompt("Input type of subject")!;
+    const fName: string = prompt("Input first name")!;
+    const lName: string = prompt("Input last name")!;
+    const subject: string = prompt("Input type of subject")!;
 
-    let trainer = new Trainer(fName, lName, subject);
+    const trainer = new Trainer(fName, lName, subject);
     trainerState.push(trainer);
     howManyTimes--;
   }
@@ -24,6 +24,6 @@ export let startAddingTrainers = (howManyTimes: number) => {
       `
     )
     .join("")}
-      <hr/> 
+      <hr/>
       </div>`;
 };

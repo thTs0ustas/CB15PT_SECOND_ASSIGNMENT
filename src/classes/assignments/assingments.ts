@@ -1,6 +1,6 @@
-import { AssignInterface } from "./types/types";
+import { AssignInterface } from "../types/types";
 
-class Assignments {
+export class Assignments {
   constructor(
     public title: string,
     public description: string,
@@ -37,13 +37,8 @@ class Assignments {
   getTotalMark() {
     return this.totalMark;
   }
-  setTotalMark(updatedtotalMark: number) {
-    this.totalMark = updatedtotalMark;
+  setTotalMark(updatedTotalMark: number) {
+    this.totalMark = updatedTotalMark;
   }
 }
 
-export class Assignment extends Assignments implements AssignInterface {
-  constructor(title: string, description: string, subDateTime: string) {
-    super(title, description, subDateTime);
-  }
-}

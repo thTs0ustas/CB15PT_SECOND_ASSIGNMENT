@@ -5,9 +5,9 @@ import {
   TrainersInterface,
 } from "../classes/types/types";
 
-let studentState: StudentInterface[] = [];
-let trainerState: TrainersInterface[] = [];
-let assignmentState: AssignInterface[] = [];
-let courseState: CourseInterface[] = [];
+const studentState: StudentInterface[] = [];
+const trainerState: TrainersInterface[] = [];
+const assignmentState: AssignInterface[] = [];
+const courseState: CourseInterface[] = [];
 
 export { studentState, trainerState, assignmentState, courseState };
