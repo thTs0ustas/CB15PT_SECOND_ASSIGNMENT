@@ -1,5 +1,3 @@
-
-
 export class Courses {
   constructor(
     public title: string,
@@ -9,5 +7,3 @@ export class Courses {
     public endDate: string
   ) {}
 }
-
-

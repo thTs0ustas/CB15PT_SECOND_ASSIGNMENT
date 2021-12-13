@@ -1,4 +1,4 @@
-import { Course, Trainer } from "../classes";
+import { Course } from "../classes";
 import { courseState } from "../state/state";
 import { getDate } from "../index";
 
@@ -36,7 +36,7 @@ export let startAddingCourses = (howManyTimes: number) => {
         <p>End Date: ${course.endDate}</p>
         <ul>
         ${course.trainers.map(
-          (trainer: Trainer) =>
+          (trainer): string =>
             `<li>Trainer:${trainer.firstName} ${trainer.lastName}</li>`
         )}
         </ul>

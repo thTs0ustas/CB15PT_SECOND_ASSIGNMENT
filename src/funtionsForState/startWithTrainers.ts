@@ -1,5 +1,6 @@
 import { Trainer } from "../classes";
 import { trainerState } from "../state/state";
+import { TrainersInterface } from "../classes/types/types";
 
 export let startAddingTrainers = (howManyTimes: number) => {
   while (howManyTimes > 0) {
@@ -15,7 +16,7 @@ export let startAddingTrainers = (howManyTimes: number) => {
   document.getElementsByClassName("trainerState")[0].innerHTML = /*HTML*/ `<div>
   ${trainerState
     .map(
-      (trainer: Trainer) => /*HTML*/ `
+      (trainer: TrainersInterface) => /*HTML*/ `
       <div>
       <p>First name: ${trainer.firstName}</p>
       <p>Last name: ${trainer.lastName}</p>

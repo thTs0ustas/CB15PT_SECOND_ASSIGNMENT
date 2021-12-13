@@ -1,4 +1,3 @@
-
 export class Trainers {
   constructor(
     public firstName: string,
@@ -19,4 +18,3 @@ export class Trainers {
     this.lastName = newName;
   }
 }
-
