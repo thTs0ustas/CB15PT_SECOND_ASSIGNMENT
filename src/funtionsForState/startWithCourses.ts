@@ -1,6 +1,6 @@
-import { getDate } from "..";
 import { Course, Trainer } from "../classes";
 import { courseState } from "../state/state";
+import { getDate } from "../index";
 
 export let startAddingCourses = (howManyTimes: number) => {
   while (howManyTimes > 0) {

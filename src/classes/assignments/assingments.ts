@@ -1,5 +1,3 @@
-import { AssignInterface } from "../types/types";
-
 export class Assignments {
   constructor(
     public title: string,
@@ -8,7 +6,6 @@ export class Assignments {
     public oralMark: number = 0,
     public totalMark: number = 0
   ) {}
-  // getters and setters
 
   getTitle() {
     return `Assignment's title: ${this.title}`;
@@ -41,4 +38,3 @@ export class Assignments {
     this.totalMark = updatedTotalMark;
   }
 }
-

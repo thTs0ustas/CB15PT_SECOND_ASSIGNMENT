@@ -1,4 +1,4 @@
-import { getDate } from "..";
+import { getDate } from "../index";
 import { Student } from "../classes";
 
 import { studentState } from "../state/state";
