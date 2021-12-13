@@ -46,5 +46,3 @@ document
   .addEventListener("click", () =>
     startAddingCourses(howManyTimesToAddCourses)
   );
-
-//

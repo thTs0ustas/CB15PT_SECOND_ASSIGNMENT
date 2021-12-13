@@ -1,12 +1,6 @@
-export interface AssignInterface {
-  title: string;
-  description: string;
-  subDateTime: string;
-  oralMark: number;
-  totalMark: number;
-}
+import { AssignInterface } from "./types/types";
 
-class Assignments implements AssignInterface {
+class Assignments {
   constructor(
     public title: string,
     public description: string,
@@ -48,7 +42,7 @@ class Assignments implements AssignInterface {
   }
 }
 
-export class Assignment extends Assignments {
+export class Assignment extends Assignments implements AssignInterface {
   constructor(title: string, description: string, subDateTime: string) {
     super(title, description, subDateTime);
   }

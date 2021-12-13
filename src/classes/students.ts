@@ -1,4 +1,4 @@
-import { AssignInterface } from "./assingments";
+import { AssignInterface, StudentInterface } from "./types/types";
 
 class Students {
   constructor(
@@ -33,7 +33,7 @@ class Students {
   }
 }
 
-export class Student extends Students {
+export class Student extends Students implements StudentInterface {
   assignments: AssignInterface[];
   constructor(
     firstName: string,

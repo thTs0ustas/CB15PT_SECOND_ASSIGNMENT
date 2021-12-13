@@ -1,11 +1,13 @@
-import { Assignment } from "../classes/assingments";
-import { Course } from "../classes/courses";
-import { Student } from "../classes/students";
-import { Trainer } from "../classes/trainers";
+import {
+  AssignInterface,
+  CourseInterface,
+  StudentInterface,
+  TrainersInterface,
+} from "../classes/types/types";
 
-let studentState: Student[] = [];
-let trainerState: Trainer[] = [];
-let assignmentState: Assignment[] = [];
-let courseState: Course[] = [];
+let studentState: StudentInterface[] = [];
+let trainerState: TrainersInterface[] = [];
+let assignmentState: AssignInterface[] = [];
+let courseState: CourseInterface[] = [];
 
 export { studentState, trainerState, assignmentState, courseState };

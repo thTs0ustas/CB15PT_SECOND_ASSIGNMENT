@@ -1,12 +1,7 @@
 import { courseState } from "../state/state";
+import { TrainersInterface } from "./types/types";
 
-interface TrainersInt {
-  firstName: string;
-  lastName: string;
-  subject: string;
-}
-
-class Trainers implements TrainersInt {
+class Trainers {
   constructor(
     public firstName: string,
     public lastName: string,
@@ -27,7 +22,7 @@ class Trainers implements TrainersInt {
   }
 }
 
-export class Trainer extends Trainers {
+export class Trainer extends Trainers implements TrainersInterface {
   constructor(firstName: string, lastName: string, subject: string) {
     super(firstName, lastName, subject);
   }

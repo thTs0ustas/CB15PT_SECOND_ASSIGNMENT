@@ -1,3 +1,5 @@
+import { CourseInterface } from "./types/types";
+
 class Courses {
   constructor(
     public title: string,
@@ -8,7 +10,7 @@ class Courses {
   ) {}
 }
 
-export class Course extends Courses {
+export class Course extends Courses implements CourseInterface {
   constructor(
     title: string,
     stream: string,
