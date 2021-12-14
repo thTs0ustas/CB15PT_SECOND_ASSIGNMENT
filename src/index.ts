@@ -38,8 +38,8 @@ document
   .addEventListener("click", () =>
     projectState.addNewCourse(howManyTimesToAddCourses)
   );
-// document
-//   .getElementsByClassName("add-assignment")[0]
-//   .addEventListener("click", () =>
-//     projectState.addNewCourse(howManyTimesToAddAssignments)
-//   );
+document
+  .getElementsByClassName("add-assignment")[0]
+  .addEventListener("click", () =>
+    projectState.addNewAssignment(howManyTimesToAddAssignments)
+  );
