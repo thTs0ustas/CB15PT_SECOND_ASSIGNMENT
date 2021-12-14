@@ -1,19 +1,19 @@
-import { getDate } from "..";
-import { Assignment, Student } from "../classes";
+import { getDate, randomId } from "..";
+import { Assignment, Student, Trainer, Course } from "../classes";
 import {
   AssignInterface,
   CourseInterface,
-  Listener,
   ListenerFnA,
   ListenerFnC,
   ListenerFnS,
   ListenerFnT,
   StudentInterface,
   TrainersInterface,
-  UnionType,
 } from "../classes/types/types";
-import { Trainer } from "../classes/trainers";
-import { Course } from "../classes/courses";
+import { studentMockup } from "../mockups/studentMockup";
+import { trainerMockup } from "../mockups/trainerMockup";
+import { assignMockup } from "../mockups/assignMockup";
+import { courseMockup } from "../mockups/courseMockup";
 
 class StateManagement {
   private studentListeners: ListenerFnS[] = [];
@@ -21,15 +21,55 @@ class StateManagement {
   private assignmentListeners: ListenerFnA[] = [];
   private courseListeners: ListenerFnC[] = [];
 
-  private studentState: StudentInterface[] = [];
-  private trainerState: TrainersInterface[] = [];
-  private assignmentState: AssignInterface[] = [];
-  private courseState: CourseInterface[] = [];
+  studentState: StudentInterface[] = studentMockup.map(
+    (mockup) =>
+      new Student(
+        mockup.id,
+        mockup.firstName,
+        mockup.lastName,
+        mockup.dateOfBirth,
+        mockup.tuitionFees,
+        mockup.assignments
+      )
+  );
+  trainerState: TrainersInterface[] = trainerMockup.map(
+    (mockup) =>
+      new Trainer(mockup.id, mockup.firstName, mockup.lastName, mockup.subject)
+  );
+  assignmentState: AssignInterface[] = assignMockup.map(
+    (mockup) =>
+      new Assignment(
+        mockup.id,
+        mockup.title,
+        mockup.description,
+        mockup.subDateTime,
+        mockup.oralMark,
+        mockup.totalMark
+      )
+  );
+  courseState: CourseInterface[] = courseMockup.map(
+    (mockup) =>
+      new Course(
+        mockup.id,
+        mockup.title,
+        mockup.stream,
+        mockup.type,
+        mockup.startDate,
+        mockup.endDate
+      )
+  );
 
   // singleton
   private static instance: StateManagement;
 
-  private constructor() {}
+  private constructor() {
+    document
+      .getElementById("studentAssign")!
+      .addEventListener("click", () => this.addAssignmentToStudent());
+    document
+      .getElementById("courseTrainers")!
+      .addEventListener("click", () => this.addTrainerInCourse());
+  }
 
   static getInstance() {
     if (this.instance) return this.instance;
@@ -37,16 +77,16 @@ class StateManagement {
     return this.instance;
   }
 
-  addListenersToStudent(listener: Listener, listenerFn: ListenerFnS) {
+  addListenersToStudent(listenerFn: ListenerFnS) {
     this.studentListeners.push(listenerFn);
   }
-  addListenersToTrainer(listener: Listener, listenerFn: ListenerFnT) {
+  addListenersToTrainer(listenerFn: ListenerFnT) {
     this.trainerListeners.push(listenerFn);
   }
-  addListenersToCourse(listener: Listener, listenerFn: ListenerFnC) {
+  addListenersToCourse(listenerFn: ListenerFnC) {
     this.courseListeners.push(listenerFn);
   }
-  addListenersToAssign(listener: Listener, listenerFn: ListenerFnA) {
+  addListenersToAssign(listenerFn: ListenerFnA) {
     this.assignmentListeners.push(listenerFn);
   }
 
@@ -57,12 +97,24 @@ class StateManagement {
       const lName: string = prompt("Input last name")!;
       const date: string = prompt("Input birth date in mm/dd/yyyy form")!;
 
-      const newStudent = new Student(fName, lName, getDate(date), 0, []);
+      const newStudent = new Student(
+        randomId(),
+        fName,
+        lName,
+        getDate(date),
+        0,
+        []
+      );
+
       this.studentState.push(newStudent);
 
-      for (const listenerFn of this.studentListeners) {
-        listenerFn(this.studentState.slice());
-      }
+      this.studentListeners.forEach((listenerFn) =>
+        listenerFn(this.studentState.slice())
+      );
+
+      this.assignmentListeners.forEach((fn) =>
+        fn(this.assignmentState.slice())
+      );
 
       howManyTimes--;
     }
@@ -75,12 +127,12 @@ class StateManagement {
       const lName: string = prompt("Input last name")!;
       const subject: string = prompt("Input type of subject")!;
 
-      const newTrainer = new Trainer(fName, lName, subject);
+      const newTrainer = new Trainer(randomId(), fName, lName, subject);
       this.trainerState.push(newTrainer);
 
-      for (const listenerFn of this.trainerListeners) {
-        listenerFn(this.trainerState.slice());
-      }
+      this.trainerListeners.forEach((listenerFn) =>
+        listenerFn(this.trainerState.slice())
+      );
 
       howManyTimes--;
     }
@@ -98,6 +150,7 @@ class StateManagement {
       const endDate: string = prompt("Input end date of course in mm/dd/yyyy")!;
 
       const newCourse = new Course(
+        randomId(),
         title,
         steam,
         type,
@@ -125,9 +178,12 @@ class StateManagement {
       )!;
 
       const newAssignment = new Assignment(
+        randomId(),
         title,
         description,
-        getDate(submissionDate)
+        getDate(submissionDate),
+        0,
+        0
       );
       this.assignmentState.push(newAssignment);
 
@@ -137,6 +193,52 @@ class StateManagement {
 
       howManyTimes--;
     }
+  }
+
+  addAssignmentToStudent() {
+    const title = prompt("Give the title of the assignment");
+    if (this.assignmentState.some((assign) => assign.title === title)) {
+      const elem = this.assignmentState.find((item) => item.title !== title)!;
+      if (elem) {
+        const name = prompt("Give the name of the student")!;
+        if (this.studentState.some((stud) => stud.firstName === name)) {
+          const st = this.studentState.find((item) => item.firstName !== name)!;
+          if (st) {
+            return this.studentState.forEach((el) => {
+              if (el === st) {
+                el.assignments.push(elem);
+                console.log(
+                  `Assignment ${elem.title} added to ${el.firstName}`
+                );
+              }
+            });
+          }
+        } else alert("No such student exists");
+      }
+    } else alert("No such assignment exists");
+  }
+  addTrainerInCourse() {
+    const title = prompt("Give the title of the course");
+    const name = prompt("Give the name of the trainer");
+
+    const courses = this.courseState.filter(
+      (assign) => assign.title === title
+    )[0];
+    const trainers = this.trainerState.filter(
+      (trainer) => trainer.firstName === name
+    )[0];
+
+    if (courses && trainers) {
+      this.courseState.forEach((el) => {
+        if (el.title === courses.title) {
+          el.trainers.push({
+            firstName: trainers.firstName,
+            lastName: trainers.lastName,
+          });
+          console.log({ ...el });
+        }
+      });
+    } else alert("No such trainer or course exists");
   }
 }
 

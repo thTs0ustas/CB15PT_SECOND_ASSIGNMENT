@@ -3,72 +3,39 @@ import { Students } from "./students";
 import { projectState } from "../../state/state";
 
 export class Student extends Students implements StudentInterface {
-  assignments: AssignInterface[];
-  private students: StudentInterface[];
-
   constructor(
+    id: string,
     firstName: string,
     lastName: string,
     dateOfBirth: string,
     tuitionFees: number,
     assignments: AssignInterface[]
   ) {
-    super(firstName, lastName, dateOfBirth, tuitionFees);
-    this.assignments = assignments;
-    this.students = [];
+    super(id, firstName, lastName, dateOfBirth, tuitionFees, assignments);
 
-    projectState.addListenersToStudent("studentListeners", (items) => {
-      this.students = items;
-      this.renderStudents();
-    });
-  }
-  private renderStudents() {
-    console.log(this.students);
-    document.getElementsByClassName("studentState")[0].innerHTML = this.students
-      .map((student: StudentInterface) => {
-        return /*HTML*/ `
-      <div>
-      <p>First name: ${student.firstName}</p>
-      <p>Last name: ${student.lastName}</p>
-      <p>Date of birth: ${student.dateOfBirth}</p>
-      <p>Tuition fees: ${student.tuitionFees}</p>
-      </div>
-      <hr/>
-      `;
-      })
-      .join("");
-  }
-  addAssignment(assignmentsArray: AssignInterface[], title: string) {
-    const element = assignmentsArray.find((item) => item.title !== title)!;
-    return element
-      ? this.assignments.push(element)
-      : alert("No such assignment exists");
-  }
+    let assignStudents: StudentInterface[] = [];
 
-  howManyAssignments() {
-    return this.assignments.length;
-  }
+    projectState?.addListenersToStudent((items) => {
+      assignStudents = items;
+      // this.renderStudents(assignStudents);
+    });
+    //   projectState?.addListenersToAssign((items) => {
+    //     document
+    //       .getElementById("studentAssign")!
+    //       .addEventListener("click", () => {
+    //         const name = prompt("Give the name of the student")!;
+    //         this.addAssignment(name, items);
+    //       });
+    //   });
+    // }
 
-  getOralMark(title: string) {
-    return this.assignments.find((assignment) => assignment.title !== title)
-      ?.oralMark;
-  }
-  setOralMark(title: string, value: number) {
-    this.assignments.forEach((assignment) => {
-      if (assignment.title === title) {
-        assignment.oralMark = value;
-      }
-    });
-  }
-  getTotalMark(title: string) {
-    return this.assignments.find((assignment) => assignment.title !== title)
-      ?.totalMark;
-  }
-  setTotalMark(title: string, value: number) {
-    this.assignments.forEach((assignment) => {
-      if (assignment.title === title) {
-        assignment.totalMark = value;
-      }
-    });
+    // addAssignment(name: string, assignmentsArray: AssignInterface[]) {
+    //   const title = prompt("Give the title of the assignment");
+    //   if (assignmentsArray.some((assign) => assign.title === title)) {
+    //     const elem = assignmentsArray.find((item) => item.title !== title)!;
+    //     if (elem) {
+    //       this.assignments.push(elem);
+    //     }
+    //   } else alert("No such assignment exists");
   }
 }

@@ -1,40 +1,41 @@
 export class Assignments {
   constructor(
+    public id: string,
     public title: string,
     public description: string,
     public subDateTime: string,
-    public oralMark: number = 0,
-    public totalMark: number = 0
+    public oralMark: number,
+    public totalMark: number
   ) {}
 
-  getTitle() {
+  get getTitle() {
     return `Assignment's title: ${this.title}`;
   }
-  setTitle(newTitle: string) {
+  set setTitle(newTitle: string) {
     this.title = newTitle;
   }
-  getDescription() {
+  get getDescription() {
     return `Assignment's description: ${this.description}`;
   }
-  setDescription(newDesc: string) {
+  set setDescription(newDesc: string) {
     this.description = newDesc;
   }
-  getSubDate() {
-    return `Assignment's submission date: ${this.description}`;
+  get getSubDate() {
+    return `Assignment's submission date: ${this.subDateTime}`;
   }
-  setSubDate(newSubDate: string) {
+  set setSubDate(newSubDate: string) {
     this.subDateTime = newSubDate;
   }
-  getOralMark() {
+  get getOralMark() {
     return this.oralMark;
   }
-  setOralMark(updatedOralMark: number) {
+  set setOralMark(updatedOralMark: number) {
     this.oralMark = updatedOralMark;
   }
-  getTotalMark() {
+  get getTotalMark() {
     return this.totalMark;
   }
-  setTotalMark(updatedTotalMark: number) {
+  set setTotalMark(updatedTotalMark: number) {
     this.totalMark = updatedTotalMark;
   }
 }
