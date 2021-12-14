@@ -1,7 +1,4 @@
-import { startAddingAssignments } from "./funtionsForState/startWithAssignments";
-import { startAddingCourses } from "./funtionsForState/startWithCourses";
-import { startAddingStudents } from "./funtionsForState/startWithStudents";
-import { startAddingTrainers } from "./funtionsForState/startWithTrainers";
+import { projectState } from "./state/state";
 
 export let getDate = (date: string) =>
   new Date(date).toISOString().split("T")[0];
@@ -29,20 +26,20 @@ document.getElementById("howManyAssignments")?.addEventListener("click", () => {
 document
   .getElementsByClassName("add-students")[0]
   .addEventListener("click", () =>
-    startAddingStudents(howManyTimesToAddStudents)
+    projectState.addNewStudent(howManyTimesToAddStudents)
   );
 document
   .getElementsByClassName("add-trainers")[0]
   .addEventListener("click", () =>
-    startAddingTrainers(howManyTimesToAddTrainers)
-  );
-document
-  .getElementsByClassName("add-assignment")[0]
-  .addEventListener("click", () =>
-    startAddingAssignments(howManyTimesToAddAssignments)
+    projectState.addNewTrainer(howManyTimesToAddTrainers)
   );
 document
   .getElementsByClassName("add-courses")[0]
   .addEventListener("click", () =>
-    startAddingCourses(howManyTimesToAddCourses)
+    projectState.addNewCourse(howManyTimesToAddCourses)
   );
+// document
+//   .getElementsByClassName("add-assignment")[0]
+//   .addEventListener("click", () =>
+//     projectState.addNewCourse(howManyTimesToAddAssignments)
+//   );
