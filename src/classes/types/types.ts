@@ -39,7 +39,10 @@ type ListenerFnT = (items: TrainersInterface[]) => void;
 type ListenerFnA = (items: AssignInterface[]) => void;
 type ListenerFnC = (items: CourseInterface[]) => void;
 
+type mockup = "is" | "isNot";
+
 export {
+  mockup,
   ListenerFnT,
   ListenerFnS,
   ListenerFnA,

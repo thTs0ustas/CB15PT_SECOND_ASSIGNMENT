@@ -17,25 +17,11 @@ export class Student extends Students implements StudentInterface {
 
     projectState?.addListenersToStudent((items) => {
       assignStudents = items;
-      // this.renderStudents(assignStudents);
+      console.log(assignStudents);
     });
-    //   projectState?.addListenersToAssign((items) => {
-    //     document
-    //       .getElementById("studentAssign")!
-    //       .addEventListener("click", () => {
-    //         const name = prompt("Give the name of the student")!;
-    //         this.addAssignment(name, items);
-    //       });
-    //   });
-    // }
 
-    // addAssignment(name: string, assignmentsArray: AssignInterface[]) {
-    //   const title = prompt("Give the title of the assignment");
-    //   if (assignmentsArray.some((assign) => assign.title === title)) {
-    //     const elem = assignmentsArray.find((item) => item.title !== title)!;
-    //     if (elem) {
-    //       this.assignments.push(elem);
-    //     }
-    //   } else alert("No such assignment exists");
+    projectState?.addListenersToAssign((assign) => {
+      console.log(assign);
+    });
   }
 }

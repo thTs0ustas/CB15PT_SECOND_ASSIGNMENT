@@ -1,5 +1,5 @@
-import { getDate, randomId } from "..";
-import { Assignment, Student, Trainer, Course } from "../classes";
+import { getDate, randomId } from "../customFunctions/customFunctions";
+import { Assignment, Course, Student, Trainer } from "../classes";
 import {
   AssignInterface,
   CourseInterface,
@@ -7,6 +7,7 @@ import {
   ListenerFnC,
   ListenerFnS,
   ListenerFnT,
+  mockup,
   StudentInterface,
   TrainersInterface,
 } from "../classes/types/types";
@@ -21,48 +22,23 @@ class StateManagement {
   private assignmentListeners: ListenerFnA[] = [];
   private courseListeners: ListenerFnC[] = [];
 
-  studentState: StudentInterface[] = studentMockup.map(
-    (mockup) =>
-      new Student(
-        mockup.id,
-        mockup.firstName,
-        mockup.lastName,
-        mockup.dateOfBirth,
-        mockup.tuitionFees,
-        mockup.assignments
-      )
-  );
-  trainerState: TrainersInterface[] = trainerMockup.map(
-    (mockup) =>
-      new Trainer(mockup.id, mockup.firstName, mockup.lastName, mockup.subject)
-  );
-  assignmentState: AssignInterface[] = assignMockup.map(
-    (mockup) =>
-      new Assignment(
-        mockup.id,
-        mockup.title,
-        mockup.description,
-        mockup.subDateTime,
-        mockup.oralMark,
-        mockup.totalMark
-      )
-  );
-  courseState: CourseInterface[] = courseMockup.map(
-    (mockup) =>
-      new Course(
-        mockup.id,
-        mockup.title,
-        mockup.stream,
-        mockup.type,
-        mockup.startDate,
-        mockup.endDate
-      )
-  );
+  studentState: StudentInterface[] = [];
+  trainerState: TrainersInterface[] = [];
+  courseState: CourseInterface[] = [];
+  assignmentState: AssignInterface[] = [];
 
   // singleton
   private static instance: StateManagement;
 
   private constructor() {
+    studentMockup.forEach((mk) => this.addNewStudent(0, "is", mk));
+    trainerMockup.forEach((mk) => this.addNewTrainer(0, "is", mk));
+    courseMockup.forEach((mk) => this.addNewCourse(0, "is", mk));
+    assignMockup.forEach((mk) => this.addNewAssignment(0, "is", mk));
+
+    document
+      .getElementById("studentWithAssign")!
+      .addEventListener("click", () => this.showStudentsWithAssign());
     document
       .getElementById("studentAssign")!
       .addEventListener("click", () => this.addAssignmentToStudent());
@@ -80,118 +56,173 @@ class StateManagement {
   addListenersToStudent(listenerFn: ListenerFnS) {
     this.studentListeners.push(listenerFn);
   }
+
   addListenersToTrainer(listenerFn: ListenerFnT) {
     this.trainerListeners.push(listenerFn);
   }
+
   addListenersToCourse(listenerFn: ListenerFnC) {
     this.courseListeners.push(listenerFn);
   }
+
   addListenersToAssign(listenerFn: ListenerFnA) {
     this.assignmentListeners.push(listenerFn);
   }
 
-  addNewStudent(howManyTimes: number) {
-    while (howManyTimes > 0) {
-      if (howManyTimes === 0) return;
-      const fName: string = prompt("Input first name")!;
-      const lName: string = prompt("Input last name")!;
-      const date: string = prompt("Input birth date in mm/dd/yyyy form")!;
+  addNewStudent(howManyTimes: number, typeM: mockup, mK?: StudentInterface) {
+    if (howManyTimes) {
+      let fName: string;
+      let lName: string;
+      let date: string;
 
-      const newStudent = new Student(
-        randomId(),
-        fName,
-        lName,
-        getDate(date),
-        0,
-        []
-      );
-
-      this.studentState.push(newStudent);
-
-      this.studentListeners.forEach((listenerFn) =>
-        listenerFn(this.studentState.slice())
-      );
-
-      this.assignmentListeners.forEach((fn) =>
-        fn(this.assignmentState.slice())
-      );
-
-      howManyTimes--;
-    }
-  }
-
-  addNewTrainer(howManyTimes: number) {
-    while (howManyTimes > 0) {
-      if (howManyTimes === 0) return;
-      const fName: string = prompt("Input first name")!;
-      const lName: string = prompt("Input last name")!;
-      const subject: string = prompt("Input type of subject")!;
-
-      const newTrainer = new Trainer(randomId(), fName, lName, subject);
-      this.trainerState.push(newTrainer);
-
-      this.trainerListeners.forEach((listenerFn) =>
-        listenerFn(this.trainerState.slice())
-      );
-
-      howManyTimes--;
-    }
-  }
-
-  addNewCourse(howManyTimes: number) {
-    while (howManyTimes > 0) {
-      if (howManyTimes === 0) return;
-      const title: string = prompt("Input courses title")!;
-      const steam: string = prompt("Input steam")!;
-      const type: string = prompt("Input type of course")!;
-      const startDate: string = prompt(
-        "Input start date of course in mm/dd/yyyy"
-      )!;
-      const endDate: string = prompt("Input end date of course in mm/dd/yyyy")!;
-
-      const newCourse = new Course(
-        randomId(),
-        title,
-        steam,
-        type,
-        getDate(startDate),
-        getDate(endDate),
-        []
-      );
-      this.courseState.push(newCourse);
-
-      for (const listenerFn of this.courseListeners) {
-        listenerFn(this.courseState.slice());
+      if (typeM === "isNot") {
+        while (howManyTimes > 0) {
+          fName = prompt("Input first name")!;
+          lName = prompt("Input last name")!;
+          date = prompt("Input birth date in mm/dd/yyyy form")!;
+          this.studentState.push(
+            new Student(randomId(), fName, lName, getDate(date), 0, [])
+          );
+        }
+        howManyTimes--;
       }
+    }
+    if (typeM === "is") {
+      this.studentState.push(
+        new Student(
+          mK!.id,
+          mK!.firstName,
+          mK!.lastName,
+          mK!.dateOfBirth,
+          mK!.tuitionFees,
+          []
+        )
+      );
+    }
+    this.studentListeners.forEach((listenerFn) =>
+      listenerFn(this.studentState.slice())
+    );
 
-      howManyTimes--;
+    this.assignmentListeners.forEach((fn) => fn(this.assignmentState.slice()));
+  }
+
+  addNewTrainer(howManyTimes: number, typeM: mockup, mk?: TrainersInterface) {
+    if (howManyTimes) {
+      let fName: string;
+      let lName: string;
+      let subject: string;
+
+      if (typeM === "isNot") {
+        while (howManyTimes > 0) {
+          fName = prompt("Input first name")!;
+          lName = prompt("Input last name")!;
+          subject = prompt("Input type of subject")!;
+          this.trainerState.push(
+            new Trainer(randomId(), fName, lName, subject)
+          );
+        }
+        howManyTimes--;
+      }
+    }
+    if (typeM === "is") {
+      this.trainerState.push(
+        new Trainer(mk!.id, mk!.firstName, mk!.lastName, mk!.subject)
+      );
+    }
+
+    this.trainerListeners.forEach((listenerFn) =>
+      listenerFn(this.trainerState.slice())
+    );
+  }
+
+  addNewCourse(howManyTimes: number, typeM: mockup, mk?: CourseInterface) {
+    if (howManyTimes) {
+      let title: string;
+      let steam: string;
+      let type: string;
+      let startDate: string;
+      let endDate: string;
+
+      if (typeM === "isNot") {
+        while (howManyTimes > 0) {
+          title = prompt("Input courses title")!;
+          steam = prompt("Input steam")!;
+          type = prompt("Input type of course")!;
+          startDate = prompt("Input start date of course in mm/dd/yyyy")!;
+          endDate = prompt("Input end date of course in mm/dd/yyyy")!;
+
+          this.courseState.push(
+            new Course(
+              randomId(),
+              title,
+              steam,
+              type,
+              getDate(startDate),
+              getDate(endDate),
+              []
+            )
+          );
+        }
+        howManyTimes--;
+      }
+    }
+    if (typeM === "is") {
+      this.courseState.push(
+        new Course(
+          mk!.id,
+          mk!.title,
+          mk!.stream,
+          mk!.type,
+          mk!.startDate,
+          mk!.endDate
+        )
+      );
+    }
+
+    for (const listenerFn of this.courseListeners) {
+      listenerFn(this.courseState.slice());
     }
   }
 
-  addNewAssignment(howManyTimes: number) {
-    while (howManyTimes > 0) {
-      if (howManyTimes === 0) return;
-      const title: string = prompt("Input assignment title")!;
-      const description: string = prompt("Input assignment description")!;
-      const submissionDate: string = prompt(
-        "Input submission date in mm/dd/yyyy"
-      )!;
+  addNewAssignment(howManyTimes: number, typeM: mockup, mk?: AssignInterface) {
+    if (howManyTimes) {
+      let title: string;
+      let description: string;
+      let submissionDate: string;
 
-      const newAssignment = new Assignment(
-        randomId(),
-        title,
-        description,
-        getDate(submissionDate),
-        0,
-        0
-      );
-      this.assignmentState.push(newAssignment);
-
-      for (const listenerFn of this.assignmentListeners) {
-        listenerFn(this.assignmentState.slice());
+      if (typeM === "isNot") {
+        while (howManyTimes > 0) {
+          title = prompt("Input assignment title")!;
+          description = prompt("Input assignment description")!;
+          submissionDate = prompt("Input submission date in mm/dd/yyyy")!;
+          this.assignmentState.push(
+            new Assignment(
+              randomId(),
+              title,
+              description,
+              getDate(submissionDate),
+              0,
+              0
+            )
+          );
+          howManyTimes--;
+        }
       }
-
-      howManyTimes--;
+    }
+    if (typeM === "is") {
+      this.assignmentState.push(
+        new Assignment(
+          mk!.id,
+          mk!.title,
+          mk!.description,
+          mk!.subDateTime,
+          mk!.oralMark,
+          mk!.totalMark
+        )
+      );
+    }
+    for (const listenerFn of this.assignmentListeners) {
+      listenerFn(this.assignmentState.slice());
     }
   }
 
@@ -217,6 +248,7 @@ class StateManagement {
       }
     } else alert("No such assignment exists");
   }
+
   addTrainerInCourse() {
     const title = prompt("Give the title of the course");
     const name = prompt("Give the name of the trainer");
@@ -239,6 +271,12 @@ class StateManagement {
         }
       });
     } else alert("No such trainer or course exists");
+  }
+
+  showStudentsWithAssign() {
+    console.log(
+      this.studentState.filter((student) => student.assignments.length > 0)
+    );
   }
 }
 

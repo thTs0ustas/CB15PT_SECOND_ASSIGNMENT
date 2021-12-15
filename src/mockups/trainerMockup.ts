@@ -1,4 +1,5 @@
 import { TrainersInterface } from "../classes/types/types";
+import { projectState } from "../state/state";
 
 export const trainerMockup: TrainersInterface[] = [
   {
