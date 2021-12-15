@@ -1,5 +1,4 @@
 import { StudentInterface } from "../classes/types/types";
-import { projectState } from "../state/state";
 
 export const studentMockup: StudentInterface[] = [
   {

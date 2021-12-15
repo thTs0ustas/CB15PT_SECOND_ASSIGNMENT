@@ -1,7 +1,7 @@
 import { TrainersInterface } from "../types/types";
 
 import { Trainers } from "./trainers";
-import { projectState } from "../../state/state";
+import { projectState } from "../../state/stateManager";
 
 export class Trainer extends Trainers implements TrainersInterface {
   constructor(
@@ -16,6 +16,7 @@ export class Trainer extends Trainers implements TrainersInterface {
 
     projectState?.addListenersToTrainer((items) => {
       trainers = items;
+      console.log(trainers);
     });
   }
 

@@ -1,4 +1,4 @@
-import { projectState } from "./state/state";
+import { projectState } from "./state/stateManager";
 
 let howManyTimesToAddStudents: number;
 let howManyTimesToAddTrainers: number;

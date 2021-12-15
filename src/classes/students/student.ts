@@ -1,6 +1,6 @@
 import { AssignInterface, StudentInterface } from "../types/types";
 import { Students } from "./students";
-import { projectState } from "../../state/state";
+import { projectState } from "../../state/stateManager";
 
 export class Student extends Students implements StudentInterface {
   constructor(

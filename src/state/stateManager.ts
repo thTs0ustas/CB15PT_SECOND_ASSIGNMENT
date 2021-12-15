@@ -35,7 +35,6 @@ class StateManagement {
     trainerMockup.forEach((mk) => this.addNewTrainer(0, "is", mk));
     courseMockup.forEach((mk) => this.addNewCourse(0, "is", mk));
     assignMockup.forEach((mk) => this.addNewAssignment(0, "is", mk));
-
     document
       .getElementById("studentWithAssign")!
       .addEventListener("click", () => this.showStudentsWithAssign());
@@ -68,7 +67,28 @@ class StateManagement {
   addListenersToAssign(listenerFn: ListenerFnA) {
     this.assignmentListeners.push(listenerFn);
   }
-
+  addAssignmentToStudent() {
+    const title = prompt("Give the title of the assignment");
+    if (this.assignmentState.some((assign) => assign.title === title)) {
+      const elem = this.assignmentState.find((item) => item.title !== title)!;
+      if (elem) {
+        const name = prompt("Give the name of the student")!;
+        if (this.studentState.some((stud) => stud.firstName === name)) {
+          const st = this.studentState.find((item) => item.firstName !== name)!;
+          if (st) {
+            return this.studentState.forEach((el) => {
+              if (el === st) {
+                el.assignments.push(elem);
+                console.log(
+                  `Assignment ${elem.title} added to ${el.firstName}`
+                );
+              }
+            });
+          }
+        } else alert("No such student exists");
+      }
+    } else alert("No such assignment exists");
+  }
   addNewStudent(howManyTimes: number, typeM: mockup, mK?: StudentInterface) {
     if (howManyTimes) {
       let fName: string;
@@ -105,7 +125,6 @@ class StateManagement {
 
     this.assignmentListeners.forEach((fn) => fn(this.assignmentState.slice()));
   }
-
   addNewTrainer(howManyTimes: number, typeM: mockup, mk?: TrainersInterface) {
     if (howManyTimes) {
       let fName: string;
@@ -225,30 +244,6 @@ class StateManagement {
       listenerFn(this.assignmentState.slice());
     }
   }
-
-  addAssignmentToStudent() {
-    const title = prompt("Give the title of the assignment");
-    if (this.assignmentState.some((assign) => assign.title === title)) {
-      const elem = this.assignmentState.find((item) => item.title !== title)!;
-      if (elem) {
-        const name = prompt("Give the name of the student")!;
-        if (this.studentState.some((stud) => stud.firstName === name)) {
-          const st = this.studentState.find((item) => item.firstName !== name)!;
-          if (st) {
-            return this.studentState.forEach((el) => {
-              if (el === st) {
-                el.assignments.push(elem);
-                console.log(
-                  `Assignment ${elem.title} added to ${el.firstName}`
-                );
-              }
-            });
-          }
-        } else alert("No such student exists");
-      }
-    } else alert("No such assignment exists");
-  }
-
   addTrainerInCourse() {
     const title = prompt("Give the title of the course");
     const name = prompt("Give the name of the trainer");
@@ -272,7 +267,6 @@ class StateManagement {
       });
     } else alert("No such trainer or course exists");
   }
-
   showStudentsWithAssign() {
     console.log(
       this.studentState.filter((student) => student.assignments.length > 0)
