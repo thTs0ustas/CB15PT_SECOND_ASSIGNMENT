@@ -3,10 +3,10 @@ import { Assignment, Course, Student, Trainer } from "../classes";
 import {
   AssignInterface,
   CourseInterface,
-  ListenerFnA,
-  ListenerFnC,
-  ListenerFnS,
-  ListenerFnT,
+  // ListenerFnA,
+  // ListenerFnC,
+  // ListenerFnS,
+  // ListenerFnT,
   mockup,
   StudentInterface,
   TrainersInterface,
@@ -17,10 +17,11 @@ import { assignMockup } from "../mockups/assignMockup";
 import { courseMockup } from "../mockups/courseMockup";
 
 class StateManagement {
-  private studentListeners: ListenerFnS[] = [];
-  private trainerListeners: ListenerFnT[] = [];
-  private assignmentListeners: ListenerFnA[] = [];
-  private courseListeners: ListenerFnC[] = [];
+  private listener: any[] = [];
+  // private studentListeners: ListenerFnS[] = [];
+  // private trainerListeners: ListenerFnT[] = [];
+  // private assignmentListeners: ListenerFnA[] = [];
+  // private courseListeners: ListenerFnC[] = [];
 
   studentState: StudentInterface[] = [];
   trainerState: TrainersInterface[] = [];
@@ -35,6 +36,7 @@ class StateManagement {
     trainerMockup.forEach((mk) => this.addNewTrainer(0, "is", mk));
     courseMockup.forEach((mk) => this.addNewCourse(0, "is", mk));
     assignMockup.forEach((mk) => this.addNewAssignment(0, "is", mk));
+
     document
       .getElementById("studentWithAssign")!
       .addEventListener("click", () => this.showStudentsWithAssign());
@@ -51,22 +53,24 @@ class StateManagement {
     this.instance = new StateManagement();
     return this.instance;
   }
-
-  addListenersToStudent(listenerFn: ListenerFnS) {
-    this.studentListeners.push(listenerFn);
+  addListener<T>(listenerFn: T) {
+    this.listener.push(listenerFn);
   }
-
-  addListenersToTrainer(listenerFn: ListenerFnT) {
-    this.trainerListeners.push(listenerFn);
-  }
-
-  addListenersToCourse(listenerFn: ListenerFnC) {
-    this.courseListeners.push(listenerFn);
-  }
-
-  addListenersToAssign(listenerFn: ListenerFnA) {
-    this.assignmentListeners.push(listenerFn);
-  }
+  // addListenersToStudent(listenerFn: ListenerFnS) {
+  //   this.studentListeners.push(listenerFn);
+  // }
+  //
+  // addListenersToTrainer(listenerFn: ListenerFnT) {
+  //   this.trainerListeners.push(listenerFn);
+  // }
+  //
+  // addListenersToCourse(listenerFn: ListenerFnC) {
+  //   this.courseListeners.push(listenerFn);
+  // }
+  //
+  // addListenersToAssign(listenerFn: ListenerFnA) {
+  //   this.assignmentListeners.push(listenerFn);
+  // }
   addAssignmentToStudent() {
     const title = prompt("Give the title of the assignment");
     if (this.assignmentState.some((assign) => assign.title === title)) {
@@ -103,10 +107,11 @@ class StateManagement {
           this.studentState.push(
             new Student(randomId(), fName, lName, getDate(date), 0, [])
           );
+          howManyTimes--;
         }
-        howManyTimes--;
       }
     }
+
     if (typeM === "is") {
       this.studentState.push(
         new Student(
@@ -119,11 +124,11 @@ class StateManagement {
         )
       );
     }
-    this.studentListeners.forEach((listenerFn) =>
+    this.listener.forEach((listenerFn) =>
       listenerFn(this.studentState.slice())
     );
 
-    this.assignmentListeners.forEach((fn) => fn(this.assignmentState.slice()));
+    this.listener.forEach((fn) => fn(this.assignmentState.slice()));
   }
   addNewTrainer(howManyTimes: number, typeM: mockup, mk?: TrainersInterface) {
     if (howManyTimes) {
@@ -139,8 +144,11 @@ class StateManagement {
           this.trainerState.push(
             new Trainer(randomId(), fName, lName, subject)
           );
+          howManyTimes--;
         }
-        howManyTimes--;
+        this.listener.forEach((listenerFn) =>
+          listenerFn(this.trainerState.slice())
+        );
       }
     }
     if (typeM === "is") {
@@ -148,10 +156,6 @@ class StateManagement {
         new Trainer(mk!.id, mk!.firstName, mk!.lastName, mk!.subject)
       );
     }
-
-    this.trainerListeners.forEach((listenerFn) =>
-      listenerFn(this.trainerState.slice())
-    );
   }
 
   addNewCourse(howManyTimes: number, typeM: mockup, mk?: CourseInterface) {
@@ -181,8 +185,8 @@ class StateManagement {
               []
             )
           );
+          howManyTimes--;
         }
-        howManyTimes--;
       }
     }
     if (typeM === "is") {
@@ -198,7 +202,7 @@ class StateManagement {
       );
     }
 
-    for (const listenerFn of this.courseListeners) {
+    for (const listenerFn of this.listener) {
       listenerFn(this.courseState.slice());
     }
   }
@@ -240,7 +244,7 @@ class StateManagement {
         )
       );
     }
-    for (const listenerFn of this.assignmentListeners) {
+    for (const listenerFn of this.listener) {
       listenerFn(this.assignmentState.slice());
     }
   }

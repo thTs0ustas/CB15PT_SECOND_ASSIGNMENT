@@ -13,14 +13,14 @@ export class Student extends Students implements StudentInterface {
   ) {
     super(id, firstName, lastName, dateOfBirth, tuitionFees, assignments);
 
-    let assignStudents: StudentInterface[] = [];
+    let assignStudents: AssignInterface[] = [];
 
-    projectState?.addListenersToStudent((items) => {
+    projectState?.addListener((items: AssignInterface[]) => {
       assignStudents = items;
       console.log(assignStudents);
     });
 
-    projectState?.addListenersToAssign((assign) => {
+    projectState?.addListener((assign: AssignInterface[]) => {
       console.log(assign);
     });
   }

@@ -1,4 +1,4 @@
-import { TrainersInterface } from "../types/types";
+import { AssignInterface, TrainersInterface } from "../types/types";
 
 import { Trainers } from "./trainers";
 import { projectState } from "../../state/stateManager";
@@ -12,9 +12,9 @@ export class Trainer extends Trainers implements TrainersInterface {
   ) {
     super(id, firstName, lastName, subject);
 
-    let trainers: TrainersInterface[] = [];
+    let trainers: AssignInterface[] = [];
 
-    projectState?.addListenersToTrainer((items) => {
+    projectState?.addListener((items: AssignInterface[]) => {
       trainers = items;
       console.log(trainers);
     });

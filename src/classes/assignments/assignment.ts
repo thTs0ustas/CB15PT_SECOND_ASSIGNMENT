@@ -14,7 +14,7 @@ export class Assignment extends Assignments implements AssignInterface {
     super(id, title, description, subDateTime, oralMark, totalMark);
     let assignments: AssignInterface[] = [];
 
-    projectState?.addListenersToAssign((items) => {
+    projectState?.addListener((items: AssignInterface[]) => {
       assignments = items;
       console.log(assignments);
     });

@@ -16,7 +16,7 @@ export class Course extends Courses implements CourseInterface {
 
     let courses: CourseInterface[] = [];
 
-    projectState?.addListenersToCourse((items) => {
+    projectState?.addListener((items: CourseInterface[]) => {
       courses = items;
       console.log(courses);
     });
