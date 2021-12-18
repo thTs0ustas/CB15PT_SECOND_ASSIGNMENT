@@ -34,19 +34,19 @@ interface StudentInterface {
   assignments: AssignInterface[];
 }
 
-type ListenerFnS = (items: StudentInterface[]) => void;
-type ListenerFnT = (items: TrainersInterface[]) => void;
-type ListenerFnA = (items: AssignInterface[]) => void;
-type ListenerFnC = (items: CourseInterface[]) => void;
+// type ListenerFnS = (items: StudentInterface[]) => void;
+// type ListenerFnT = (items: TrainersInterface[]) => void;
+// type ListenerFnA = (items: AssignInterface[]) => void;
+// type ListenerFnC = (items: CourseInterface[]) => void;
 
 type mockup = "is" | "isNot";
 
 export {
   mockup,
-  ListenerFnT,
-  ListenerFnS,
-  ListenerFnA,
-  ListenerFnC,
+  // ListenerFnT,
+  // ListenerFnS,
+  // ListenerFnA,
+  // ListenerFnC,
   AssignInterface,
   TrainersInterface,
   StudentInterface,

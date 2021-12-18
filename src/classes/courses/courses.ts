@@ -1,12 +1,25 @@
 export class Courses {
+  public id: string;
+  public title: string;
+  public stream: string;
+  public type: string;
+  public startDate: string;
+  public endDate: string;
   constructor(
-    public id: string,
-    public title: string,
-    public stream: string,
-    public type: string,
-    public startDate: string,
-    public endDate: string
-  ) {}
+    id: string,
+    title: string,
+    stream: string,
+    type: string,
+    startDate: string,
+    endDate: string
+  ) {
+    this.id = id;
+    this.title = title;
+    this.stream = stream;
+    this.type = type;
+    this.startDate = startDate;
+    this.endDate = endDate;
+  }
   get getId() {
     return this.id;
   }

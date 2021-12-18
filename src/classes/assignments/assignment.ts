@@ -1,6 +1,5 @@
 import { AssignInterface } from "../types/types";
 import { Assignments } from "./assingments";
-import { projectState } from "../../state/stateManager";
 
 export class Assignment extends Assignments implements AssignInterface {
   constructor(
@@ -12,11 +11,5 @@ export class Assignment extends Assignments implements AssignInterface {
     totalMark: number
   ) {
     super(id, title, description, subDateTime, oralMark, totalMark);
-    let assignments: AssignInterface[] = [];
-
-    projectState?.addListener((items: AssignInterface[]) => {
-      assignments = items;
-      console.log(assignments);
-    });
   }
 }

@@ -1,14 +1,29 @@
 import { AssignInterface } from "../types/types";
 
 export class Students {
+  id: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  tuitionFees: number;
+  assignments: AssignInterface[];
+
   constructor(
-    public id: string,
-    public firstName: string,
-    public lastName: string,
-    public dateOfBirth: string,
-    public tuitionFees: number,
-    public assignments: AssignInterface[]
-  ) {}
+    id: string,
+    firstName: string,
+    lastName: string,
+    dateOfBirth: string,
+    tuitionFees: number,
+    assignments: AssignInterface[]
+  ) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.dateOfBirth = dateOfBirth;
+    this.tuitionFees = tuitionFees;
+    this.assignments = assignments;
+  }
+
   get getFirstName() {
     return this.firstName;
   }
