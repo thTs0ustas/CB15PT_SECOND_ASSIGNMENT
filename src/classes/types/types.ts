@@ -1,6 +1,9 @@
+export type PartOfCourse = "Java" | "C++" | "Javascript" | "Python";
+
 interface AssignInterface {
   id: string;
   title: string;
+  partOfCourse: PartOfCourse;
   description: string;
   subDateTime: string;
   oralMark: number;
@@ -17,6 +20,7 @@ interface CourseInterface {
   startDate: string;
   endDate: string;
   trainers: TrainersInCourses;
+  students: TrainersInCourses;
 }
 
 interface TrainersInterface {

@@ -19,23 +19,19 @@ class Events extends StateManagement {
           "How many trainers do you want to add?"
         )!;
       });
-    document
-      .getElementsByClassName("add-trainers")[0]
-      .addEventListener("click", () => {
-        this.addNewTrainer(howManyTimesToAddTrainers, "isNot");
-        howManyTimesToAddTrainers = 0;
-      });
+    document.getElementById("add-trainers")!.addEventListener("click", () => {
+      this.addNewTrainer(howManyTimesToAddTrainers, "isNot");
+      howManyTimesToAddTrainers = 0;
+    });
     document.getElementById("howManyCourses")?.addEventListener("click", () => {
       howManyTimesToAddCourses = +prompt(
         "How many courses do you want to add?"
       )!;
     });
-    document
-      .getElementsByClassName("add-courses")[0]
-      .addEventListener("click", () => {
-        this.addNewCourse(howManyTimesToAddCourses, "isNot");
-        howManyTimesToAddCourses = 0;
-      });
+    document.getElementById("add-courses")!.addEventListener("click", () => {
+      this.addNewCourse(howManyTimesToAddCourses, "isNot");
+      howManyTimesToAddCourses = 0;
+    });
     document
       .getElementById("howManyAssignments")
       ?.addEventListener("click", () => {
@@ -44,12 +40,10 @@ class Events extends StateManagement {
         )!;
       });
 
-    document
-      .getElementsByClassName("add-assignment")[0]
-      .addEventListener("click", () => {
-        this.addNewAssignment(howManyTimesToAddAssignments, "isNot");
-        howManyTimesToAddAssignments = 0;
-      });
+    document.getElementById("add-assignment")!.addEventListener("click", () => {
+      this.addNewAssignment(howManyTimesToAddAssignments, "isNot");
+      howManyTimesToAddAssignments = 0;
+    });
     document
       .getElementById("howManyStudents")
       ?.addEventListener("click", () => {
@@ -57,12 +51,10 @@ class Events extends StateManagement {
           "How many students do you want to add?"
         )!;
       });
-    document
-      .getElementsByClassName("add-students")[0]
-      .addEventListener("click", () => {
-        this.addNewStudent(howManyTimesToAddStudents, "isNot");
-        howManyTimesToAddStudents = 0;
-      });
+    document.getElementById("add-students")!.addEventListener("click", () => {
+      this.addNewStudent(howManyTimesToAddStudents, "isNot");
+      howManyTimesToAddStudents = 0;
+    });
     document
       .getElementById("studentState")!
       .addEventListener("click", () =>

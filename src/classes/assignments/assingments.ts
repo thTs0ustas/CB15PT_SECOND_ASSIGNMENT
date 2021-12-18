@@ -1,7 +1,10 @@
+import { PartOfCourse } from "../types/types";
+
 export class Assignments {
   constructor(
     public id: string,
     public title: string,
+    public partOfCourse: PartOfCourse,
     public description: string,
     public subDateTime: string,
     public oralMark: number,

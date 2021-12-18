@@ -9,6 +9,7 @@ export const courseMockup: CourseInterface[] = [
     startDate: "12/22/2021",
     endDate: "6/21/2022",
     trainers: [],
+    students: [],
   },
   {
     id: "YhJnQ",
@@ -18,6 +19,7 @@ export const courseMockup: CourseInterface[] = [
     startDate: "12/8/2022",
     endDate: "4/15/2022",
     trainers: [],
+    students: [],
   },
   {
     id: "58W09",
@@ -27,6 +29,7 @@ export const courseMockup: CourseInterface[] = [
     startDate: "7/1/2022",
     endDate: "9/17/2022",
     trainers: [],
+    students: [],
   },
   {
     id: "5q9vR",
@@ -36,6 +39,7 @@ export const courseMockup: CourseInterface[] = [
     startDate: "8/30/2022",
     endDate: "6/12/2022",
     trainers: [],
+    students: [],
   },
   {
     id: "Y6j9K",
@@ -45,6 +49,7 @@ export const courseMockup: CourseInterface[] = [
     startDate: "3/28/2022",
     endDate: "7/21/2022",
     trainers: [],
+    students: [],
   },
   {
     id: "T4Hcf",
@@ -54,6 +59,7 @@ export const courseMockup: CourseInterface[] = [
     startDate: "3/30/2022",
     endDate: "10/28/2022",
     trainers: [],
+    students: [],
   },
   {
     id: "y3OQ9",
@@ -63,6 +69,7 @@ export const courseMockup: CourseInterface[] = [
     startDate: "8/9/2022",
     endDate: "6/27/2022",
     trainers: [],
+    students: [],
   },
   {
     id: "q2nDO",
@@ -72,6 +79,7 @@ export const courseMockup: CourseInterface[] = [
     startDate: "1/11/2022",
     endDate: "9/4/2022",
     trainers: [],
+    students: [],
   },
   {
     id: "fsz5k",
@@ -81,6 +89,7 @@ export const courseMockup: CourseInterface[] = [
     startDate: "3/9/2022",
     endDate: "3/26/2022",
     trainers: [],
+    students: [],
   },
   {
     id: "w8Cb2",
@@ -90,5 +99,6 @@ export const courseMockup: CourseInterface[] = [
     startDate: "12/5/2022",
     endDate: "4/13/2022",
     trainers: [],
+    students: [],
   },
 ];

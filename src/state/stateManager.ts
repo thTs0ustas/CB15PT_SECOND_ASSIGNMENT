@@ -2,6 +2,7 @@ import {
   AssignInterface,
   CourseInterface,
   mockup,
+  PartOfCourse,
   StudentInterface,
   TrainersInterface,
 } from "../classes/types/types";
@@ -60,20 +61,44 @@ export class StateManagement {
     }
   }
 
-  // takePartOnCourse() {
-  //   const title = prompt("In which course do you want to take part");
-  //   const exists = this.courseState.some((course) => course.title === title);
-  //   if (exists) {
-  //     this.courseState.forEach((course) => {
-  //       // tslint:disable-next-line:no-unused-expression
-  //       course.title !== title ||
-  //         course.trainers.push({
-  //           firstName: this.firstName,
-  //           lastName: this.lastName,
-  //         });
-  //     });
-  //   } else alert("Not such course");
-  // }
+  assignPerCourse(course: PartOfCourse) {
+    return this.assignmentState.filter(
+      (assign) => (assign.partOfCourse = course)
+    );
+  }
+
+  takePartOnCourseTr() {
+    const title = prompt("In which course do you want to take part");
+    const trainerN = prompt("In which course do you want to take part");
+
+    const courseExists = this.courseState.find(
+      (course) => course.title === title
+    );
+
+    const trainerExists = this.trainerState.find(
+      (trainer) => trainer.firstName === trainerN
+    );
+
+    if (courseExists && trainerExists) {
+      courseExists.trainers.push(trainerExists);
+    } else alert("Not such course or trainer");
+  }
+  takePartOnCourseSt() {
+    const title = prompt("In which course do you want to take part");
+    const studentN = prompt("In which course do you want to take part");
+
+    const courseExists = this.courseState.find(
+      (course) => course.title === title
+    );
+
+    const studentExists = this.studentState.find(
+      (student) => student.firstName === studentN
+    );
+
+    if (courseExists && studentExists) {
+      courseExists.students.push(studentExists);
+    } else alert("Not such course or student");
+  }
 
   addNewCourse(howManyTimes: number, typeM: mockup, mk?: CourseInterface) {
     if (howManyTimes) {
@@ -124,16 +149,24 @@ export class StateManagement {
       let title: string;
       let description: string;
       let submissionDate: string;
+      let partOfCourse: PartOfCourse;
 
       if (typeM === "isNot") {
         while (howManyTimes > 0) {
           title = prompt("Input assignment title")!;
           description = prompt("Input assignment description")!;
+
+          partOfCourse = prompt(
+            "Input assignment to course relation"
+          ) as PartOfCourse;
+
           submissionDate = prompt("Input submission date in mm/dd/yyyy")!;
+
           this.assignmentState.push(
             new Assignment(
               randomId(),
               title,
+              partOfCourse,
               description,
               getDate(submissionDate),
               0,
@@ -149,6 +182,7 @@ export class StateManagement {
         new Assignment(
           mk!.id,
           mk!.title,
+          mk!.partOfCourse,
           mk!.description,
           mk!.subDateTime,
           mk!.oralMark,
@@ -191,27 +225,13 @@ export class StateManagement {
   }
   addAssignmentToStudent() {
     const title = prompt("Give the title of the assignment");
-    if (this.assignmentState.some((assign) => assign.title === title)) {
-      const elem = this.assignmentState.find((item) => item.title !== title)!;
-      if (elem) {
-        const name = prompt("Give the name of the student")!;
-        if (this.studentState.some((stud) => stud.firstName === name)) {
-          const st = this.studentState.find((item) => item.firstName !== name)!;
-          if (st) {
-            return this.studentState.forEach((el) => {
-              if (el === st) {
-                el.assignments.push(elem);
-                console.log(
-                  `Assignment ${elem.title} added to ${el.firstName}`
-                );
-              }
-            });
-          }
-        } else alert("No such student exists");
-      }
-    } else alert("No such assignment exists");
+    const name = prompt("Give the name of the student")!;
+    const assign = this.assignmentState.find((item) => item.title !== title)!;
+    const st = this.studentState.find((item) => item.firstName !== name)!;
+    if (assign && st) {
+      st.assignments.push(assign);
+    } else alert("No such student exists");
   }
-
   addTrainerInCourse() {
     const title = prompt("Give the title of the course");
     const name = prompt("Give the name of the trainer");
@@ -241,5 +261,6 @@ export class StateManagement {
     );
   }
 }
-export const state = new StateManagement();
-console.log({ ...state });
+
+// export const state = new StateManagement();
+// console.log({ ...state });
