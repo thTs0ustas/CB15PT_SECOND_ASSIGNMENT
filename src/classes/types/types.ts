@@ -1,4 +1,4 @@
-export type PartOfCourse = "Java" | "C++" | "Javascript" | "Python";
+type PartOfCourse = "Java" | "C++" | "Javascript" | "Python";
 
 interface AssignInterface {
   id: string;
@@ -19,6 +19,7 @@ interface CourseInterface {
   type: string;
   startDate: string;
   endDate: string;
+  cost: number;
   trainers: TrainersInCourses;
   students: TrainersInCourses;
 }
@@ -36,21 +37,14 @@ interface StudentInterface {
   dateOfBirth: string;
   tuitionFees: number;
   assignments: AssignInterface[];
+  course: CourseInterface[];
 }
-
-// type ListenerFnS = (items: StudentInterface[]) => void;
-// type ListenerFnT = (items: TrainersInterface[]) => void;
-// type ListenerFnA = (items: AssignInterface[]) => void;
-// type ListenerFnC = (items: CourseInterface[]) => void;
 
 type mockup = "is" | "isNot";
 
 export {
+  PartOfCourse,
   mockup,
-  // ListenerFnT,
-  // ListenerFnS,
-  // ListenerFnA,
-  // ListenerFnC,
   AssignInterface,
   TrainersInterface,
   StudentInterface,

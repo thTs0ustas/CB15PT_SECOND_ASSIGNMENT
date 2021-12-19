@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@types/lodash": "^4.14.178",
     "prettier": "^2.5.1",
     "tslint": "^6.1.3",
     "tslint-plugin-prettier": "^2.3.0",
@@ -7,7 +8,8 @@
     "webpack-cli": "^4.9.1"
   },
   "dependencies": {
-    "live-server": "^1.2.1",
+    "live-server": "^1.1.0",
+    "lodash": "^4.17.21",
     "ts-loader": "^9.2.6",
     "typescript": "^4.5.3"
   },

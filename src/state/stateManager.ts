@@ -6,12 +6,14 @@ import {
   StudentInterface,
   TrainersInterface,
 } from "../classes/types/types";
+
 import { getDate, randomId } from "../customFunctions/customFunctions";
 import { Assignment, Course, Student, Trainer } from "../classes";
 import { studentMockup } from "../mockups/studentMockup";
 import { assignMockup } from "../mockups/assignMockup";
 import { courseMockup } from "../mockups/courseMockup";
 import { trainerMockup } from "../mockups/trainerMockup";
+import { groupBy } from "lodash";
 
 export class StateManagement {
   studentState: StudentInterface[] = [];
@@ -34,6 +36,15 @@ export class StateManagement {
     document
       .getElementById("courseTrainers")!
       .addEventListener("click", () => this.addTrainerInCourse());
+    document
+      .getElementById("assignPerCourse")!
+      .addEventListener("click", () => this.assignPerCourse());
+    document
+      .getElementById("studentPerCourse")!
+      .addEventListener("click", () => this.showStudentsPerCourse());
+    document
+      .getElementById("stTakePart")!
+      .addEventListener("click", () => this.takePartOnCourseSt());
   }
 
   addNewTrainer(howManyTimes: number, typeM: mockup, mk?: TrainersInterface) {
@@ -60,46 +71,6 @@ export class StateManagement {
       );
     }
   }
-
-  assignPerCourse(course: PartOfCourse) {
-    return this.assignmentState.filter(
-      (assign) => (assign.partOfCourse = course)
-    );
-  }
-
-  takePartOnCourseTr() {
-    const title = prompt("In which course do you want to take part");
-    const trainerN = prompt("In which course do you want to take part");
-
-    const courseExists = this.courseState.find(
-      (course) => course.title === title
-    );
-
-    const trainerExists = this.trainerState.find(
-      (trainer) => trainer.firstName === trainerN
-    );
-
-    if (courseExists && trainerExists) {
-      courseExists.trainers.push(trainerExists);
-    } else alert("Not such course or trainer");
-  }
-  takePartOnCourseSt() {
-    const title = prompt("In which course do you want to take part");
-    const studentN = prompt("In which course do you want to take part");
-
-    const courseExists = this.courseState.find(
-      (course) => course.title === title
-    );
-
-    const studentExists = this.studentState.find(
-      (student) => student.firstName === studentN
-    );
-
-    if (courseExists && studentExists) {
-      courseExists.students.push(studentExists);
-    } else alert("Not such course or student");
-  }
-
   addNewCourse(howManyTimes: number, typeM: mockup, mk?: CourseInterface) {
     if (howManyTimes) {
       let title: string;
@@ -123,8 +94,7 @@ export class StateManagement {
               steam,
               type,
               getDate(startDate),
-              getDate(endDate),
-              []
+              getDate(endDate)
             )
           );
           howManyTimes--;
@@ -203,7 +173,7 @@ export class StateManagement {
           lName = prompt("Input last name")!;
           date = prompt("Input birth date in mm/dd/yyyy form")!;
           this.studentState.push(
-            new Student(randomId(), fName, lName, getDate(date), 0, [])
+            new Student(randomId(), fName, lName, getDate(date), 0, [], [])
           );
           howManyTimes--;
         }
@@ -217,11 +187,48 @@ export class StateManagement {
           mK!.firstName,
           mK!.lastName,
           mK!.dateOfBirth,
-          mK!.tuitionFees,
+          0,
+          [],
           []
         )
       );
     }
+  }
+
+  assignPerCourse() {
+    const course = prompt("Which do you want to look up");
+    const courseExists = this.courseState.find((crs) => crs.title === course);
+    if (courseExists)
+      return this.assignmentState.filter(
+        (assign) => assign.partOfCourse === course
+      );
+    alert("No such course exists");
+  }
+  showStudentsPerCourse() {
+    let studentsPerCourse = {};
+    const courses = this.courseState.map((course) => course.stream);
+    courses.forEach((course) => {
+      studentsPerCourse = groupBy(this.studentState, course);
+    });
+    console.log(studentsPerCourse);
+    return studentsPerCourse;
+  }
+  takePartOnCourseSt() {
+    const title = prompt("In which course do you want to take part");
+    const studentN = prompt("In which course do you want to take part");
+
+    const courseExists = this.courseState.find(
+      (course) => course.title === title
+    );
+
+    const studentExists = this.studentState.find(
+      (student) => student.firstName === studentN
+    );
+
+    if (courseExists && studentExists) {
+      studentExists.tuitionFees += courseExists.cost;
+      courseExists.students.push(studentExists);
+    } else alert("Not such course or student");
   }
   addAssignmentToStudent() {
     const title = prompt("Give the title of the assignment");
@@ -260,7 +267,21 @@ export class StateManagement {
       this.studentState.filter((student) => student.assignments.length > 0)
     );
   }
-}
 
-// export const state = new StateManagement();
-// console.log({ ...state });
+  // takePartOnCourseTr() {
+  //   const title = prompt("In which course do you want to take part");
+  //   const trainerN = prompt("In which course do you want to take part");
+  //
+  //   const courseExists = this.courseState.find(
+  //     (course) => course.title === title
+  //   );
+  //
+  //   const trainerExists = this.trainerState.find(
+  //     (trainer) => trainer.firstName === trainerN
+  //   );
+  //
+  //   if (courseExists && trainerExists) {
+  //     courseExists.trainers.push(trainerExists);
+  //   } else alert("Not such course or trainer");
+  // }
+}

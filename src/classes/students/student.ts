@@ -1,4 +1,8 @@
-import { AssignInterface, StudentInterface } from "../types/types";
+import {
+  AssignInterface,
+  CourseInterface,
+  StudentInterface,
+} from "../types/types";
 import { Students } from "./students";
 
 export class Student extends Students implements StudentInterface {
@@ -8,7 +12,8 @@ export class Student extends Students implements StudentInterface {
     lastName: string,
     dateOfBirth: string,
     tuitionFees: number,
-    assignments: AssignInterface[]
+    assignments: AssignInterface[],
+    public course: CourseInterface[]
   ) {
     super(id, firstName, lastName, dateOfBirth, tuitionFees, assignments);
   }

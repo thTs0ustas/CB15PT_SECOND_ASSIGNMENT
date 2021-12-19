@@ -8,6 +8,7 @@ export const studentMockup: StudentInterface[] = [
     dateOfBirth: "7/11/1997",
     tuitionFees: 2067,
     assignments: [],
+    course: [],
   },
   {
     id: "NtlUe",
@@ -16,6 +17,7 @@ export const studentMockup: StudentInterface[] = [
     dateOfBirth: "6/23/1998",
     tuitionFees: 1294,
     assignments: [],
+    course: [],
   },
   {
     id: "Km2L6",
@@ -24,6 +26,7 @@ export const studentMockup: StudentInterface[] = [
     dateOfBirth: "6/30/1998",
     tuitionFees: 2282,
     assignments: [],
+    course: [],
   },
   {
     id: "oICSG",
@@ -32,6 +35,7 @@ export const studentMockup: StudentInterface[] = [
     dateOfBirth: "12/19/2008",
     tuitionFees: 2275,
     assignments: [],
+    course: [],
   },
   {
     id: "sLIRb",
@@ -40,6 +44,7 @@ export const studentMockup: StudentInterface[] = [
     dateOfBirth: "7/13/2011",
     tuitionFees: 1738,
     assignments: [],
+    course: [],
   },
   {
     id: "VpWEp",
@@ -48,6 +53,7 @@ export const studentMockup: StudentInterface[] = [
     dateOfBirth: "6/9/1998",
     tuitionFees: 766,
     assignments: [],
+    course: [],
   },
   {
     id: "fl42d",
@@ -56,6 +62,7 @@ export const studentMockup: StudentInterface[] = [
     dateOfBirth: "12/6/1994",
     tuitionFees: 1693,
     assignments: [],
+    course: [],
   },
   {
     id: "7gYGv",
@@ -64,6 +71,7 @@ export const studentMockup: StudentInterface[] = [
     dateOfBirth: "8/27/2004",
     tuitionFees: 789,
     assignments: [],
+    course: [],
   },
   {
     id: "ApDJx",
@@ -72,6 +80,7 @@ export const studentMockup: StudentInterface[] = [
     dateOfBirth: "3/1/2018",
     tuitionFees: 2271,
     assignments: [],
+    course: [],
   },
   {
     id: "SJc5z",
@@ -80,5 +89,6 @@ export const studentMockup: StudentInterface[] = [
     dateOfBirth: "5/28/2013",
     tuitionFees: 1264,
     assignments: [],
+    course: [],
   },
 ];

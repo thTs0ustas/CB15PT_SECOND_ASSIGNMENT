@@ -9,6 +9,8 @@ export class Course extends Courses implements CourseInterface {
     type: string,
     startDate: string,
     endDate: string,
+
+    public cost: number = 0,
     public trainers: { firstName: string; lastName: string }[] = [],
     public students: { firstName: string; lastName: string }[] = []
   ) {
