@@ -4,14 +4,12 @@
     "strict": true,
 
     "lib": ["ES2021","DOM","DOM.Iterable","ScriptHost"],
-    "module": "CommonJS",
-    "target": "ES6",
+    "module": "es2022",
+    "target": "ES2021",
     "jsx": "react",
     "allowJs": true,
     "moduleResolution": "node",
     "removeComments": true,
-//    "noEmitOnError": true,
-//    "sourceMap": true
   },
   "exclude": [
   "node_modules"

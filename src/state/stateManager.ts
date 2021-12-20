@@ -26,28 +26,6 @@ export class StateManagement {
     assignMockup.forEach((mk) => this.addNewAssignment(0, "is", mk));
     courseMockup.forEach((mk) => this.addNewCourse(0, "is", mk));
     trainerMockup.forEach((mk) => this.addNewTrainer(0, "is", mk));
-
-    document
-      .getElementById("studentWithAssign")!
-      .addEventListener("click", () => this.showStudentsWithAssign());
-    document
-      .getElementById("studentAssign")!
-      .addEventListener("click", () => this.addAssignmentToStudent());
-    document
-      .getElementById("courseTrainers")!
-      .addEventListener("click", () => this.addTrainerInCourse());
-    document
-      .getElementById("assignPerCourse")!
-      .addEventListener("click", () => this.assignPerCourse());
-    document
-      .getElementById("studentPerCourse")!
-      .addEventListener("click", () => this.showStudentsPerCourse());
-    document
-      .getElementById("stTakePart")!
-      .addEventListener("click", () => this.takePartOnCourseSt());
-    document
-      .getElementById("trainersPerCourse")!
-      .addEventListener("click", () => this.showTrainersPerCourse());
   }
 
   addNewTrainer(howManyTimes: number, typeM: mockup, mk?: TrainersInterface) {

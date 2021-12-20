@@ -5,9 +5,6 @@ let howManyTimesToAddAssignments: number;
 let howManyTimesToAddCourses: number;
 let howManyTimesToAddTrainers: number;
 
-// tslint:disable-next-line:no-unused-expression
-// new StateManagement();
-
 class Events extends StateManagement {
   private static instance: Events;
   constructor() {
@@ -75,6 +72,27 @@ class Events extends StateManagement {
       .addEventListener("click", () =>
         console.log("Assignments", this.assignmentState)
       );
+    document
+      .getElementById("studentWithAssign")!
+      .addEventListener("click", () => this.showStudentsWithAssign());
+    document
+      .getElementById("studentAssign")!
+      .addEventListener("click", () => this.addAssignmentToStudent());
+    document
+      .getElementById("courseTrainers")!
+      .addEventListener("click", () => this.addTrainerInCourse());
+    document
+      .getElementById("assignPerCourse")!
+      .addEventListener("click", () => this.assignPerCourse());
+    document
+      .getElementById("studentPerCourse")!
+      .addEventListener("click", () => this.showStudentsPerCourse());
+    document
+      .getElementById("stTakePart")!
+      .addEventListener("click", () => this.takePartOnCourseSt());
+    document
+      .getElementById("trainersPerCourse")!
+      .addEventListener("click", () => this.showTrainersPerCourse());
   }
 
   static getInstance() {
