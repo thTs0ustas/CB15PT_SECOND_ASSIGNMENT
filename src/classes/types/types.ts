@@ -1,5 +1,5 @@
 type PartOfCourse = "Java" | "C++" | "Javascript" | "Python";
-
+type CourseType = "part time" | "full time";
 interface AssignInterface {
   id: string;
   title: string;
@@ -16,7 +16,7 @@ interface CourseInterface {
   id: string;
   title: string;
   stream: string;
-  type: string;
+  type: CourseType;
   startDate: string;
   endDate: string;
   cost: number;
@@ -43,6 +43,7 @@ interface StudentInterface {
 type mockup = "is" | "isNot";
 
 export {
+  CourseType,
   PartOfCourse,
   mockup,
   AssignInterface,

@@ -1,15 +1,17 @@
+import { CourseType } from "../types/types";
+
 export class Courses {
   public id: string;
   public title: string;
   public stream: string;
-  public type: string;
+  public type: CourseType;
   public startDate: string;
   public endDate: string;
   constructor(
     id: string,
     title: string,
     stream: string,
-    type: string,
+    type: CourseType,
     startDate: string,
     endDate: string
   ) {

@@ -1,19 +1,19 @@
 import {
   AssignInterface,
   CourseInterface,
+  CourseType,
   mockup,
   PartOfCourse,
   StudentInterface,
   TrainersInterface,
 } from "../classes/types/types";
 
-import { getDate, randomId } from "../customFunctions/customFunctions";
+import { getDate, randomId, setDate } from "../customFunctions/customFunctions";
 import { Assignment, Course, Student, Trainer } from "../classes";
 import { studentMockup } from "../mockups/studentMockup";
 import { assignMockup } from "../mockups/assignMockup";
 import { courseMockup } from "../mockups/courseMockup";
 import { trainerMockup } from "../mockups/trainerMockup";
-import { groupBy } from "lodash";
 
 export class StateManagement {
   studentState: StudentInterface[] = [];
@@ -45,6 +45,9 @@ export class StateManagement {
     document
       .getElementById("stTakePart")!
       .addEventListener("click", () => this.takePartOnCourseSt());
+    document
+      .getElementById("trainersPerCourse")!
+      .addEventListener("click", () => this.showTrainersPerCourse());
   }
 
   addNewTrainer(howManyTimes: number, typeM: mockup, mk?: TrainersInterface) {
@@ -64,6 +67,8 @@ export class StateManagement {
           howManyTimes--;
         }
       }
+    } else if (!howManyTimes && typeM === "isNot") {
+      alert("Must specify how many trainers you want to add");
     }
     if (typeM === "is") {
       this.trainerState.push(
@@ -75,7 +80,7 @@ export class StateManagement {
     if (howManyTimes) {
       let title: string;
       let steam: string;
-      let type: string;
+      let type: CourseType;
       let startDate: string;
       let endDate: string;
 
@@ -83,10 +88,9 @@ export class StateManagement {
         while (howManyTimes > 0) {
           title = prompt("Input courses title")!;
           steam = prompt("Input steam")!;
-          type = prompt("Input type of course")!;
+          type = prompt("Input type of course")! as CourseType;
           startDate = prompt("Input start date of course in mm/dd/yyyy")!;
           endDate = prompt("Input end date of course in mm/dd/yyyy")!;
-
           this.courseState.push(
             new Course(
               randomId(),
@@ -94,12 +98,14 @@ export class StateManagement {
               steam,
               type,
               getDate(startDate),
-              getDate(endDate)
+              setDate(startDate, type)!
             )
           );
           howManyTimes--;
         }
       }
+    } else if (!howManyTimes && typeM === "isNot") {
+      alert("Must specify how many courses you want to add");
     }
     if (typeM === "is") {
       this.courseState.push(
@@ -108,8 +114,8 @@ export class StateManagement {
           mk!.title,
           mk!.stream,
           mk!.type,
-          mk!.startDate,
-          mk!.endDate
+          getDate(mk!.startDate),
+          setDate(mk!.startDate, mk!.type)!
         )
       );
     }
@@ -146,6 +152,8 @@ export class StateManagement {
           howManyTimes--;
         }
       }
+    } else if (!howManyTimes && typeM === "isNot") {
+      alert("Must specify how many assignments you want to add");
     }
     if (typeM === "is") {
       this.assignmentState.push(
@@ -178,6 +186,8 @@ export class StateManagement {
           howManyTimes--;
         }
       }
+    } else if (!howManyTimes && typeM === "isNot") {
+      alert("Must specify how many students you want to add");
     }
 
     if (typeM === "is") {
@@ -196,31 +206,79 @@ export class StateManagement {
   }
 
   assignPerCourse() {
-    const course = prompt("Which do you want to look up");
-    const courseExists = this.courseState.find((crs) => crs.title === course);
+    const course = prompt("Which course do you want to look up");
+
+    const courseExists = this.courseState.find(
+      (crs) => crs.title.toLowerCase() === course?.toLowerCase()
+    );
+
     if (courseExists)
-      return this.assignmentState.filter(
-        (assign) => assign.partOfCourse === course
+      return console.log(
+        this.assignmentState.filter(
+          (assign) =>
+            assign.partOfCourse.toLowerCase() === course?.toLowerCase()
+        )
       );
     alert("No such course exists");
   }
   showStudentsPerCourse() {
     let studentsPerCourse = {};
-    const courses = this.courseState.map((course) => course.stream);
-    courses.forEach((course) => {
-      studentsPerCourse = groupBy(this.studentState, course);
-    });
-    console.log(studentsPerCourse);
-    return studentsPerCourse;
-  }
-  takePartOnCourseSt() {
-    const title = prompt("In which course do you want to take part");
-    const studentN = prompt("In which course do you want to take part");
 
-    const courseExists = this.courseState.find(
-      (course) => course.title === title
+    const courseType = [
+      ...new Set(this.courseState.map((course) => course.type)),
+    ];
+
+    this.courseState.forEach(
+      (course) =>
+        (studentsPerCourse = {
+          ...studentsPerCourse,
+          [course.stream]: {
+            [courseType[0]]:
+              (course.type === courseType[0] && course.students) || [],
+            [courseType[1]]:
+              (course.type === courseType[1] && course.students) || [],
+          },
+        })
     );
 
+    console.log("Students per course: ", studentsPerCourse);
+    return studentsPerCourse;
+  }
+  showTrainersPerCourse() {
+    let trainersPerCourse = {};
+
+    this.courseState.forEach(
+      (course) =>
+        (trainersPerCourse = {
+          ...trainersPerCourse,
+          [course.stream]: this.trainerState.filter(
+            (trainer) => trainer.subject === course.stream
+          ),
+        })
+    );
+
+    console.log("Trainers per course: ", trainersPerCourse);
+    return trainersPerCourse;
+  }
+  takePartOnCourseSt() {
+    const typesOfCourse = {
+      1: "Full_Time",
+      2: "Part_Time",
+    };
+    const title = prompt("In which course do you want to take part");
+
+    const type = prompt(
+      "What type of course? (1:Full_Time, 2:Part_Time)"
+    )! as unknown as keyof typeof typesOfCourse;
+
+    const studentN = prompt("Which student do you want to take part");
+
+    const courseExists = this.courseState.find((course) => {
+      if (course.title === title && course.type === typesOfCourse[type]) {
+        return course;
+      }
+    });
+    console.log(title, type, courseExists);
     const studentExists = this.studentState.find(
       (student) => student.firstName === studentN
     );
@@ -228,6 +286,7 @@ export class StateManagement {
     if (courseExists && studentExists) {
       studentExists.tuitionFees += courseExists.cost;
       courseExists.students.push(studentExists);
+      alert("Student added to course");
     } else alert("Not such course or student");
   }
   addAssignmentToStudent() {
@@ -237,6 +296,7 @@ export class StateManagement {
     const st = this.studentState.find((item) => item.firstName !== name)!;
     if (assign && st) {
       st.assignments.push(assign);
+      alert("Assignment added to student " + name);
     } else alert("No such student exists");
   }
   addTrainerInCourse() {
@@ -264,24 +324,8 @@ export class StateManagement {
   }
   showStudentsWithAssign() {
     console.log(
+      "Students with assignments: ",
       this.studentState.filter((student) => student.assignments.length > 0)
     );
   }
-
-  // takePartOnCourseTr() {
-  //   const title = prompt("In which course do you want to take part");
-  //   const trainerN = prompt("In which course do you want to take part");
-  //
-  //   const courseExists = this.courseState.find(
-  //     (course) => course.title === title
-  //   );
-  //
-  //   const trainerExists = this.trainerState.find(
-  //     (trainer) => trainer.firstName === trainerN
-  //   );
-  //
-  //   if (courseExists && trainerExists) {
-  //     courseExists.trainers.push(trainerExists);
-  //   } else alert("Not such course or trainer");
-  // }
 }

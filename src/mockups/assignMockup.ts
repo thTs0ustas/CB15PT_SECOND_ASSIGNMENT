@@ -7,7 +7,7 @@ export const assignMockup: AssignInterface[] = [
     partOfCourse: "Javascript",
     description:
       "ut at dolor quis odio consequat varius integer ac leo pellentesque ultrices mattis odio donec vitae nisi nam",
-    subDateTime: "7/14/2022",
+    subDateTime: "14/7/2022",
     oralMark: 11,
     totalMark: 74,
   },
@@ -17,7 +17,7 @@ export const assignMockup: AssignInterface[] = [
     partOfCourse: "Javascript",
     description:
       "suscipit ligula in lacus curabitur at ipsum ac tellus semper interdum mauris ullamcorper purus sit",
-    subDateTime: "11/16/2022",
+    subDateTime: "16/11/2022",
     oralMark: 48,
     totalMark: 69,
   },
@@ -27,7 +27,7 @@ export const assignMockup: AssignInterface[] = [
     partOfCourse: "Java",
     description:
       "lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti",
-    subDateTime: "4/19/2022",
+    subDateTime: "19/4/2022",
     oralMark: 2,
     totalMark: 74,
   },
@@ -37,7 +37,7 @@ export const assignMockup: AssignInterface[] = [
     partOfCourse: "Python",
     description:
       "pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est risus auctor sed",
-    subDateTime: "11/3/2022",
+    subDateTime: "3/11/2022",
     oralMark: 7,
     totalMark: 80,
   },
@@ -47,7 +47,7 @@ export const assignMockup: AssignInterface[] = [
     partOfCourse: "Python",
     description:
       "volutpat convallis morbi odio odio elementum eu interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit",
-    subDateTime: "8/11/2022",
+    subDateTime: "11/8/2022",
     oralMark: 35,
     totalMark: 80,
   },
@@ -57,7 +57,7 @@ export const assignMockup: AssignInterface[] = [
     partOfCourse: "Python",
     description:
       "morbi non lectus aliquam sit amet diam in magna bibendum imperdiet nullam orci pede venenatis non",
-    subDateTime: "7/13/2022",
+    subDateTime: "13/7/2022",
     oralMark: 20,
     totalMark: 65,
   },
@@ -67,7 +67,7 @@ export const assignMockup: AssignInterface[] = [
     partOfCourse: "Java",
     description:
       "id turpis integer aliquet massa id lobortis convallis tortor risus dapibus augue vel accumsan tellus nisi eu orci mauris",
-    subDateTime: "9/7/2022",
+    subDateTime: "7/9/2022",
     oralMark: 26,
     totalMark: 73,
   },
@@ -77,7 +77,7 @@ export const assignMockup: AssignInterface[] = [
     partOfCourse: "C++",
     description:
       "rhoncus aliquet pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis nam congue",
-    subDateTime: "8/16/2022",
+    subDateTime: "16/8/2022",
     oralMark: 6,
     totalMark: 70,
   },
@@ -87,7 +87,7 @@ export const assignMockup: AssignInterface[] = [
     partOfCourse: "Java",
     description:
       "eget orci vehicula condimentum curabitur in libero ut massa volutpat convallis morbi odio odio elementum eu",
-    subDateTime: "4/18/2022",
+    subDateTime: "18/4/2022",
     oralMark: 33,
     totalMark: 89,
   },
@@ -97,7 +97,7 @@ export const assignMockup: AssignInterface[] = [
     partOfCourse: "C++",
     description:
       "bibendum imperdiet nullam orci pede venenatis non sodales sed tincidunt",
-    subDateTime: "5/8/2022",
+    subDateTime: "8/5/2022",
     oralMark: 25,
     totalMark: 70,
   },

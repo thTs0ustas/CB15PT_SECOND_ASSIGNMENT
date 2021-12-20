@@ -1,4 +1,4 @@
-import { CourseInterface } from "../types/types";
+import { CourseInterface, CourseType } from "../types/types";
 import { Courses } from "./courses";
 
 export class Course extends Courses implements CourseInterface {
@@ -6,7 +6,7 @@ export class Course extends Courses implements CourseInterface {
     id: string,
     title: string,
     stream: string,
-    type: string,
+    type: CourseType,
     startDate: string,
     endDate: string,
 
