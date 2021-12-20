@@ -18,8 +18,6 @@ export const setDate = (date: string, type: CourseType) => {
   const d = new Date(date);
   if (type === "full time") {
     d.setMonth(d.getMonth() + 3);
-    console.log(new Date(date).toJSON());
-    console.log(d.toJSON());
     endDate = d.toJSON()?.slice(0, 10).split("-").reverse().join("/");
 
     return endDate;
